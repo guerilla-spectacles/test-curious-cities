@@ -2,7 +2,7 @@ var express = require('express'),
     http = require('http'),
     path = require('path'),
     aws = require('aws-sdk'),
-    uuid = = require('node-uuid');
+    uuid = require('node-uuid');
 
 var app = express();
 app.set('views', __dirname + '/views');
