@@ -24,7 +24,7 @@ app.get('/sign_s3', function(req, res){
     var unique_name = uuid.v4();
     var s3_params = { 
         Bucket: S3_BUCKET_NAME,
-        Name: unique_name,
+        // Name: unique_name,
         Key: req.query.s3_object_name, 
         Expires: 60, 
         ContentType: req.query.s3_object_type, 
