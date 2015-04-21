@@ -3,7 +3,8 @@ var express = require('express'),
     path = require('path'),
     aws = require('aws-sdk'),
     uuid = require('node-uuid'),
-    ExifImage = require('exif').ExifImage;
+    ExifImage = require('exif').ExifImage,
+    db = require('orchestrate')(process.env.ORCHESTRATE_API_KEY);
 
 var app = express();
 app.set('views', __dirname + '/views');
@@ -51,6 +52,14 @@ app.get('/sign_s3', function(req, res){
     app.post('/submit_form', function(req, res){
 //     description = req.body.description;
 //     picture_url = req.body.picture_url;
+        db.post('curious-data', {
+            "url": req.body.picture_url,
+            "name": req.body.name,
+            "description": req.body.description,
+            "category": req.body.oddity_type
+            "time": new Date(),
+
+        })
 });
 
 app.listen(app.get('port'));

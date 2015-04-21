@@ -10,6 +10,7 @@
     "ejs": "*",
     "aws-sdk": "*",
     "node-uuid": "1.4.3",
-    "exif": "0.4.x"
+    "exif": "0.4.x",
+    "orchestrate": "^0.2.0",
   }
 }

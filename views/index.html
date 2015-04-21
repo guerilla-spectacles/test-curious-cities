@@ -11,7 +11,17 @@
 
 <form method="POST" action="/submit_form/">
     <input type="hidden" id="picture_url" name="picture_url" value="" />
-    <input type="text" name="full_name" placeholder="description" /><br />
+    <input type="text" name="name" placeholder="name" /><br />
+    <textarea name="description" cols="30" rows="30" placeholder="description"></textarea>
+    <br />
+    <select name='oddity_type'>\
+                <option value='Unspecified'>Category</option>\
+                <option value='Art'>Art</option>\
+                <option value='Nature'>Nature</option>\
+                <option value='Architecture'>Architecture</option>\
+                <option value='Other'>Other</option>\
+                </select>
+                <br />
     <input type="submit" value="Upload photo" />
 </form>
 
