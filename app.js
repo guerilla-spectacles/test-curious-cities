@@ -39,7 +39,7 @@ app.get('/sign_s3', function(req, res){
         else{ 
             var return_data = {
                 signed_request: data,
-                url: 'https://'+S3_BUCKET_NAME+'.s3.amazonaws.com/images'+s3_params.Key
+                url: 'https://'+S3_BUCKET_NAME+'.s3.amazonaws.com/'+s3_params.Key
                 // url: 'https://'+S3_BUCKET_NAME+'.s3.amazonaws.com/'+req.query.s3_object_name 
             };
             res.write(JSON.stringify(return_data));
