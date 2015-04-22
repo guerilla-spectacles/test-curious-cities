@@ -53,12 +53,18 @@ app.get('/sign_s3', function(req, res){
 //     description = req.body.description;
 //     picture_url = req.body.picture_url;
         db.post('curious-data', {
-            "url": req.body.picture_url,
-            "name": req.body.name,
-            "description": req.body.description,
-            "category": req.body.oddity_type,
+            "url": req.param("picture_url"),
+            "name": req.param("name"),
+            "description": req.param("description"),
+            "category": req.param("oddity_type"),
             "uploadTime": new Date()
         })
+        .then(function (res) {
+            console.log(res.statusCode)
+        })
+        .fail(function(err) {
+
+        });
 });
 
 app.listen(app.get('port'));
