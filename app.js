@@ -57,8 +57,7 @@ app.get('/sign_s3', function(req, res){
             "name": req.body.name,
             "description": req.body.description,
             "category": req.body.oddity_type
-            "time": new Date(),
-
+            "time": new Date()
         })
 });
 
