@@ -1,0 +1,3 @@
+$(function(){
+    curiousMap = new scoutMap()
+});

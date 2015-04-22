@@ -1,60 +1,46 @@
+<!DOCTYPE html>
 <html>
+<head>
+	<meta charset="utf-8">
+	<title>Curious Cities</title>
+	<link rel="stylesheet" href="node_modules/normalize.css/normalize.css">
+	<link rel="stylesheet" href="css/main.css">
+	<script src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
+	<script src="http://maps.googleapis.com/maps/api/js"></script>
+	<script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.2/underscore-min.js'></script>
+	<script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/backbone.js/1.1.2/backbone-min.js'></script>
+	<script src="js/mapBBView.js"></script>
+	<script src="js/markersview.js"></script>
+	<script src="js/buttonView.js"></script>
+	<script src="js/sidebarsView.js"></script>
+	<script src="js/main.js"></script>
+</head>
 <body>
+	<header>
+		<div id="logo">
+			<h1>Curious Cities</h1>
+		</div>
 
-<h1>Add a photo</h1>
+		<div id="buttons">
+			<div class="button-container">
+				<button id="add-button">Add an Oddity</button>
+			</div>
+			 <!-- REMOVED UNTIL GUIDE ME OPTION IS AVAILABLE -->
+			
+			<div class="button-container">
+			<button id="guide-button">What's Nearby</button>
+			</div>
+			
+			<div class="button-container">
+			<button id="about-button">About</button>
+			</div>
+	</div>
+</header>
+<div id="info-contents"></div>
+<div id="google-map" class="center small-map"></div>
+<!-- Figure out if small map class is necessary -->
 
-<input type="file" id="files"/>
-<p id="status">Please select a file</p>
-<div style="border:1px solid gray;width:300px;"  id="preview"><img src="/images/default.png" style="width:300px;" /></div>
-
-<h2>Your information</h2>
-
-<form method="POST" action="/submit_form/">
-    <input type="hidden" id="picture_url" name="picture_url" value="" />
-    <input type="text" name="name" placeholder="name" /><br />
-    <textarea name="description" cols="30" rows="30" placeholder="description"></textarea>
-    <br />
-    <select name='oddity_type'>\
-                <option value='Unspecified'>Category</option>\
-                <option value='Art'>Art</option>\
-                <option value='Nature'>Nature</option>\
-                <option value='Architecture'>Architecture</option>\
-                <option value='Other'>Other</option>\
-                </select>
-                <br />
-    <input type="submit" value="Upload photo" />
-</form>
-
-<script type="text/javascript" src="/javascripts/s3upload.js"></script>
-
-<script type="text/javascript">
-
-//this will be in Backbone upload view
-function s3_upload(){
-    var status_elem = document.getElementById("status");
-    var url_elem = document.getElementById("picture_url");
-    var preview_elem = document.getElementById("preview");
-    var s3upload = new S3Upload({
-        file_dom_selector: 'files',
-        s3_sign_put_url: '/sign_s3',
-        onProgress: function(percent, message) {
-            status_elem.innerHTML = 'Upload progress: ' + percent + '% ' + message;
-        },
-        onFinishS3Put: function(public_url) {
-            status_elem.innerHTML = 'Upload completed. Uploaded to: '+ public_url;
-            url_elem.value = public_url;
-            preview_elem.innerHTML = '<img src="'+public_url+'" style="width:300px;" />';
-        },
-        onError: function(status) {
-            status_elem.innerHTML = 'Upload error: ' + status;
-        }
-    });
-}
-
-(function() {
-    var input_element = document.getElementById("files");
-    input_element.onchange = s3_upload;
-})();
-</script>
-</body>
+<!-- <section id="page-info">
+-->
+<!-- </section>--></body>
 </html>
