@@ -7,7 +7,8 @@ var express = require('express'),
     db = require('orchestrate')(process.env.ORCHESTRATE_API_KEY);
 
 var app = express();
-app.set('views', __dirname + '/views');
+// app.set('views', __dirname + '/views');
+app.set('title', 'Curious Cities ');
 app.engine('html', require('ejs').renderFile);
 app.set('port', process.env.PORT || 3000);
 app.use(express.static(path.join(__dirname, 'public')));
