@@ -17,7 +17,13 @@ var AWS_SECRET_ACCESS_KEY = process.env.AWS_SECRET_ACCESS_KEY;
 var S3_BUCKET_NAME = process.env.S3_BUCKET_NAME
 
 app.get('/', function(req, res){
-    res.render('index.html');
+    db.newSearchBuilder()
+    .collection('curious-data')
+    .limit(10)
+    .query('*')
+    .then(function (topics){
+      res.render('index', { title: 'Express', topics: topics.body.results, totalCount: topics.body.total_count});
+    });
 });
 
 app.get('/sign_s3', function(req, res){
