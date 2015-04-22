@@ -2,6 +2,7 @@ var sidebars = Backbone.View.extend({
 	el: '#info-contents',
 	events: {
 		'click #save' : 'save',
+		'change #file': 's3_upload'
 	},
 
 	initialize: function(opts){
@@ -11,7 +12,7 @@ var sidebars = Backbone.View.extend({
 			<h2>Closest Curiosties</h2>\
 			<div class='curiousProfile'>\
 			<h3>Angst on Angst</h3>\
-			<img class='curious-img' src='./img/jollyRog.jpg'>\
+			<img class='curious-img' src='public/images/jollyRog.jpg'>\
 			<p class='curious-description'>This is a weird and ugly mural of some sort of hipster meta-angst.  #ugly</p>\
 			</div>\
 			<p class='curious-type'>Category:<br>\
@@ -51,7 +52,9 @@ var sidebars = Backbone.View.extend({
     				<input placeholder='choose file' type='file' class='form-button'>\
 				</div>\
 				-->\
-				<input type='file' class='form-button'>\
+				<input type=\"file\" id=\"files\"/>\
+<p id=\"status\">Please select a file</p>\
+<div id=\"preview\"><img src=\"public/images/default.png\" style=\"width:300px;\" /></div>\
 				<br>\
 				<input type='submit' class='center' value='Submit'>\
 			</form>\
@@ -84,7 +87,32 @@ var sidebars = Backbone.View.extend({
 					console.log('yep, got a click');
 					//var photoLoc = $('#photoInput').get(0).files[0];
 					//console.log(photoLoc);
-				},		
+				},
 
+	s3_upload: function() {
+		var status_elem = document.getElementById("status");
+	    var url_elem = document.getElementById("picture_url");
+	    var preview_elem = document.getElementById("preview");
+	    var s3upload = new S3Upload({
+	        file_dom_selector: 'files',
+	        s3_sign_put_url: '/sign_s3',
+	        onProgress: function(percent, message) {
+	            status_elem.innerHTML = 'Upload progress: ' + percent + '% ' + message;
+	        },
+	        onFinishS3Put: function(public_url) {
+	            status_elem.innerHTML = 'Upload completed. Uploaded to: '+ public_url;
+	            url_elem.value = public_url;
+	            preview_elem.innerHTML = '<img src="'+public_url+'" style="width:300px;" />';
+	        },
+	        onError: function(status) {
+	            status_elem.innerHTML = 'Upload error: ' + status;
+	        }
+    });
+
+	}	
+// (function() {
+//     var input_element = document.getElementById("files");
+//     input_element.onchange = s3_upload;
+// })();
 
 })
