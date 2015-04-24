@@ -8,16 +8,17 @@ var sidebars = Backbone.View.extend({
 	initialize: function(opts){
 		var self = this;
 
-		oddity = "<div id=\"guide-button-div\" class=\"info-dropdown center\">\
-			<h2>Closest Curiosties</h2>\
-			<div class='curiousProfile'>\
-			<h3>Angst on Angst</h3>\
-			<img class='curious-img' src='public/images/jollyRog.jpg'>\
-			<p class='curious-description'>This is a weird and ugly mural of some sort of hipster meta-angst.  #ugly</p>\
-			</div>\
-			<p class='curious-type'>Category:<br>\
-			Art</p>\
-			</div>";
+		var attraction = {
+			title: 'Angst on Angst',
+			description: 'This is a weird and ugly mural of some sort of hipster meta-angst.  #ugly',
+			curiousType: 'Art',
+			img: 'public/images/jollyRog.jpg'
+		}
+
+		var template = "<div id='guide-button-div' class='info-dropdown center'><h2>Closest Curiosties</h2><div class='curiousProfile'><h3>{{title}}</h3><img class='curious-img' src='{{img}}'><p class='curious-description'>{{description}}</p><p class='curious-type'>Category:{{curiousType}}</p></div>"
+		var theCode = Mustache.to_html(template, attraction);
+
+		oddity = theCode;
 
 		about = "<div id=\"about-button-div\" class=\"info-dropdown center\">\
 			<h2>About Curious Cities</h2>\
