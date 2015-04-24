@@ -1,3 +1,6 @@
+//////TO DO
+// When click marker, clear sidebar and replace with info
+
 var fakeDB = {};
 fakeDB.locations = [
 	{
@@ -35,12 +38,7 @@ var mapLocs = new MapLocs();
 	mapLocs.add(fakeDB.locations);
 	console.log(mapLocs);
 
-// make one view for each marker, iterate through collection, make a new view for each thing in collection to pass through. 
-
-// var allMarkersView = new AllMarkersView({collection: mapLocs});
-
 var AllMarkersView = Backbone.View.extend({
-// google map 
 	el: '#google-map',
 	render: function() {
 		this.collection.each(function (marker) {
@@ -59,15 +57,17 @@ var AllMarkersView = Backbone.View.extend({
 
 	}
 });
-// this.view.model
 
 var MarkerView = Backbone.View.extend({
 	// each id
 	// el: 
-	// events: {
-		// "click" : fucntion name
-	// },
-	// click function
+	// var self = this;
+	events: {
+		"click self" : "locationClick"
+	},
+	locationClick: function() {
+		console.log('clicked on a marker')
+	},
 	initialize: function(opts){
 		var self = this;
 		self.map = opts.map;
@@ -114,7 +114,6 @@ var MarkerView = Backbone.View.extend({
 			description: this.model.get('description'),
 			category: this.model.get('category'),
 			// description
-			
 			// tel: telephone,
 			// email: email,
 			// web: web,

@@ -14,9 +14,9 @@ var scoutMap = Backbone.Model.extend({
 		console.log(locationFlag);
 		// console.log(locationFlag.placeMarker);
 		//var scoutPlace = new scoutMapView({map: map});
-		google.maps.event.addListener(map, 'click', function(event) {
-  			locationFlag.placeMarker();
-  		});
+		// google.maps.event.addListener(map, 'click', function(event) {
+  // 			locationFlag.placeMarker();
+  // 		});
 		//console.log(map);
 	},
 

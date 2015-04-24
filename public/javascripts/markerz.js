@@ -35,7 +35,7 @@ var markersView = Backbone.View.extend({
       longitude: -122.6590430,
       category: 'Art'
     },
-        {
+    {
       title: 'ffka',
       description: 'fasdjkfa;lskdfja;lksdfj This is a weird and ugly mural of some sort of hipster meta-angst.  #ugly',
       curiousType: 'Stuff',
