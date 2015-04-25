@@ -94,6 +94,10 @@ var sidebars = Backbone.View.extend({
 		console.log('yep, got a click');
 		//var photoLoc = $('#photoInput').get(0).files[0];
 		//console.log(photoLoc);
+	// 	(function() {
+ //    	var input_element = document.getElementById("files");
+ //    	input_element.onchange = s3_upload;
+	// })()
 	},
 
 	//////////////////  Controls the upload  //////////////////
@@ -117,9 +121,16 @@ var sidebars = Backbone.View.extend({
 	        }
     	});
 	}	
-// (function() {
-//     var input_element = document.getElementById("files");
-//     input_element.onchange = s3_upload;
-// })();
+
 
 })
+
+
+
+
+
+
+
+
+
+

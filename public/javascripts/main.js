@@ -1,3 +1,5 @@
 $(function(){
-    curiousMap = new ScoutMap()
+    curiousMap = new ScoutMap();
+
 });
+
