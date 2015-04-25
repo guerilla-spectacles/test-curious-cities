@@ -1,25 +1,27 @@
+//////////////////  Creates Sidebar View //////////////////
 var sidebars = Backbone.View.extend({
 	el: '#info-contents',
 	events: {
 		'click #save' : 'save',
-		'change #file': 's3_upload'
+		'change #file': 's3_upload',
+		'markerClick' : 'renderMarkerInfo'
 	},
 
 	initialize: function(opts){
 		var self = this;
 
-		var attraction = {
-			title: 'Angst on Angst',
-			description: 'This is a weird and ugly mural of some sort of hipster meta-angst.  #ugly',
-			curiousType: 'Art',
-			img: 'public/images/jollyRog.jpg'
-		}
-
+		//////////////////  Selected marker sidebar //////////////////
+		
+		//Template for marker info
 		var template = "<div id='guide-button-div' class='info-dropdown center'><h2>Closest Curiosties</h2><div class='curiousProfile'><h3>{{title}}</h3><img class='curious-img' src='{{img}}'><p class='curious-description'>{{description}}</p><p class='curious-type'>Category:{{curiousType}}</p></div>"
-		var theCode = Mustache.to_html(template, attraction);
+		
+		//Converts marker info into template material
+		var theCode = Mustache.to_html(template, fakeDB.locations[1]);
 
+		//makes the sidebar section
 		oddity = theCode;
 
+		//////////////////  About Curious Cities Sidebar//////////////////
 		about = "<div id=\"about-button-div\" class=\"info-dropdown center\">\
 			<h2>About Curious Cities</h2>\
 			<p>\
@@ -30,6 +32,7 @@ var sidebars = Backbone.View.extend({
 			</p>\
 		</div>";
 		
+		//////////////////  Add Location Sidebar //////////////////
 		addLoc = "<div id=\"add-button-div\" class=\"info-dropdown center\">\
 			<h2>Add a new location</h2>\
 			<form>\
@@ -54,13 +57,14 @@ var sidebars = Backbone.View.extend({
 				</div>\
 				-->\
 				<input type=\"file\" id=\"files\"/>\
-<p id=\"status\">Please select a file</p>\
-<div id=\"preview\"><img src=\"public/images/default.png\" style=\"width:300px;\" /></div>\
+				<p id=\"status\">Please select a file</p>\
+				<div id=\"preview\"><img src=\"public/images/default.png\" style=\"width:300px;\" /></div>\
 				<br>\
-				<input type='submit' class='center' value='Submit'>\
+				<input type='submit' id='save' class='center' value='Submit'>\
 			</form>\
 		</div>";
 
+		//////////////////  Connects opts with render //////////////////		
 		if (opts == 'guide') {
 			this.render('guide')
 		} else if (opts == 'add') {
@@ -71,6 +75,7 @@ var sidebars = Backbone.View.extend({
 
 	},
 
+	//////////////////  Renders the sidebars //////////////////
 	render: function(which){
 		$('#info-contents').children().remove();
 		if (which == 'guide'){
@@ -83,13 +88,15 @@ var sidebars = Backbone.View.extend({
 
 	},
 
+	//////////////////  Controls the sumbit/save button event //////////////////
 	save: function(event){
-					//event.preventDefault();
-					console.log('yep, got a click');
-					//var photoLoc = $('#photoInput').get(0).files[0];
-					//console.log(photoLoc);
-				},
+		//event.preventDefault();
+		console.log('yep, got a click');
+		//var photoLoc = $('#photoInput').get(0).files[0];
+		//console.log(photoLoc);
+	},
 
+	//////////////////  Controls the upload  //////////////////
 	s3_upload: function() {
 		var status_elem = document.getElementById("status");
 	    var url_elem = document.getElementById("picture_url");
@@ -108,8 +115,7 @@ var sidebars = Backbone.View.extend({
 	        onError: function(status) {
 	            status_elem.innerHTML = 'Upload error: ' + status;
 	        }
-    });
-
+    	});
 	}	
 // (function() {
 //     var input_element = document.getElementById("files");

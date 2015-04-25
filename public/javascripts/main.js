@@ -1,3 +1,3 @@
 $(function(){
-    curiousMap = new scoutMap()
+    curiousMap = new ScoutMap()
 });
