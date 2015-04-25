@@ -3,11 +3,12 @@ var express = require('express'),
     path = require('path'),
     aws = require('aws-sdk'),
     uuid = require('node-uuid'),
-    ExifImage = require('exif').ExifImage,
+    ExifImage = require('exif').ExifImage;
     db = require('orchestrate')(process.env.ORCHESTRATE_API_KEY);
 
 var app = express();
-// app.set('views', __dirname + '/views');
+
+app.set('views', path.join(__dirname, 'public'));
 app.set('title', 'Curious Cities ');
 app.engine('html', require('ejs').renderFile);
 app.set('port', process.env.PORT || 3000);

@@ -79,7 +79,7 @@ var ScoutMap = Backbone.View.extend({
 		      	var userLocation = new google.maps.Marker({
 		      		map: map,
 		      		position: pos,
-		      		icon: 'img/you-are-here.png',
+		      		icon: 'images/you-are-here.png',
 		      		id: 'usersLocation',
 		      		animation: google.maps.Animation.DROP,
 		      	})

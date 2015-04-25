@@ -8,7 +8,7 @@ fakeDB.locations = [
 		title: '(Fake DB 1: Angst on Angst',
 		description: 'This is a weird and ugly mural of some sort of hipster meta-angst.  #ugly',
 		curiousType: 'Art',
-		img: 'public/images/jollyRog.jpg',
+		img: 'images/jollyRog.jpg',
 		latitude: 45.5136190,
 		longitude: -122.6590430,
 		category: 'Art'
@@ -17,7 +17,7 @@ fakeDB.locations = [
 		title: 'Fake DB 2: Blak',
 		description: 'Blah blah blah, picture picture kflasjf;lasd f;alskjdf falsdkj  #ugly',
 		curiousType: 'Stuff',
-		img: 'public/images/fontina.png',
+		img: 'images/fontina.png',
 		latitude: 45.517555,
 		longitude: -122.631819,
 		category: 'Art'
@@ -26,7 +26,7 @@ fakeDB.locations = [
 		title: 'Fake DB 2: Blak',
 		description: 'Blah blah blah, picture picture kflasjf;lasd f;alskjdf falsdkj  #ugly',
 		curiousType: 'Stuff',
-		img: 'public/images/fontina.png',
+		img: 'images/fontina.png',
 		latitude: 45.577555,
 		longitude: -122.601819,
 		category: 'Art'
@@ -116,9 +116,9 @@ var MarkerView = Backbone.View.extend({
 		// if (this.model.telephone =='undefined'){ telephone ='';} else { telephone = this.model.telephone;}
 		// if (this.model.email =='undefined'){ email ='';} else { email = this.model.email;}
 		// if (this.model.web =='undefined'){ web ='';} else { web = this.model.web;}
-		// if (this.model.markerType =='undefined'){ icon ='public/images/map-marker-image.png';} else { icon = this.model.markerType;}      
+		// if (this.model.markerType =='undefined'){ icon ='images/map-marker-image.png';} else { icon = this.model.markerType;}      
 			
-			icon: 'public/images/map-marker-image.png',
+			icon: 'images/map-marker-image.png',
 			position: new google.maps.LatLng(latitude, longitude),
 			map: map,
 			img: img,
