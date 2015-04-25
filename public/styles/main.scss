@@ -54,6 +54,7 @@ body {
 	background-color: $dark-green;
 	font-family: 'Open Sans', sans-serif;
   font-size: 13px;
+  margin: 0;
 }
 
 *, *:before, *:after {
@@ -113,7 +114,7 @@ header {
 #info-contents {
   // min-width: 300px;
     width: 100%;
-    display: inline-block;
+    display: inline;
     height: 50vh;
     right: 0;
     .info-dropdown {

@@ -1,3 +1,4 @@
+//////////////////  Manages the menu buttons //////////////////
 var Buttons = Backbone.View.extend({
 	el: '#buttons',
 
@@ -11,6 +12,7 @@ var Buttons = Backbone.View.extend({
 			console.log('Hi from updatebutton')
 	},
 
+	//////////////////  Add Location Sidebar, takes opts from sidebarsView's initialize function //////////////////
 	createSB: function(event, opts){
 		event.preventDefault();
 		$('#info-contents').children().remove();
@@ -24,10 +26,4 @@ var Buttons = Backbone.View.extend({
 			Info = new sidebars('info')
 		};	
 	},
-
-
-
-	
-
-
 })
