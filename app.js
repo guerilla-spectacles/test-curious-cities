@@ -3,11 +3,11 @@ var express = require('express'),
     path = require('path'),
     aws = require('aws-sdk'),
     uuid = require('node-uuid'),
-    ExifImage = require('exif').ExifImage,
-    db = require('orchestrate')(process.env.ORCHESTRATE_API_KEY);
+    ExifImage = require('exif').ExifImage;
+    // db = require('orchestrate')(process.env.ORCHESTRATE_API_KEY);
 
 var app = express();
-// app.set('views', __dirname + '/views');
+
 app.set('title', 'Curious Cities ');
 app.engine('html', require('ejs').renderFile);
 app.set('port', process.env.PORT || 3000);
@@ -16,11 +16,13 @@ app.use(express.static(path.join(__dirname, 'public')));
 var AWS_ACCESS_KEY_ID = process.env.AWS_ACCESS_KEY_ID;
 var AWS_SECRET_ACCESS_KEY = process.env.AWS_SECRET_ACCESS_KEY;
 var S3_BUCKET_NAME = process.env.S3_BUCKET_NAME
-
+console.log("here is 19");
 app.get('/', function(req, res){
+    console.log("before res.render");
     res.render('index.html');
+    console.log("after res.render");
 });
-
+console.log("here is 23");
 app.get('/sign_s3', function(req, res){
     aws.config.update({accessKeyId: AWS_ACCESS_KEY_ID , secretAccessKey: AWS_SECRET_ACCESS_KEY });
     var s3 = new aws.S3(); 
