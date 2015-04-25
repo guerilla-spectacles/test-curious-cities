@@ -4,7 +4,7 @@ var express = require('express'),
     aws = require('aws-sdk'),
     uuid = require('node-uuid'),
     ExifImage = require('exif').ExifImage;
-    // db = require('orchestrate')(process.env.ORCHESTRATE_API_KEY);
+    db = require('orchestrate')(process.env.ORCHESTRATE_API_KEY);
 
 var app = express();
 
