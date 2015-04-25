@@ -58,7 +58,7 @@ var sidebars = Backbone.View.extend({
 				-->\
 				<input type=\"file\" id=\"files\"/>\
 				<p id=\"status\">Please select a file</p>\
-				<div id=\"preview\"><img src=\"public/images/default.png\" style=\"width:300px;\" /></div>\
+				<div id=\"preview\"><img src=\"images/default.png\" style=\"width:300px;\" /></div>\
 				<br>\
 				<input type='submit' id='save' class='center' value='Submit'>\
 			</form>\

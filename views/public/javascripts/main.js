@@ -1,5 +1,0 @@
-$(function(){
-    curiousMap = new ScoutMap();
-
-});
-
