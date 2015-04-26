@@ -4,6 +4,7 @@ var sidebars = Backbone.View.extend({
 	events: {
 		'click #save' : 'save',
 		'change #file': 's3_upload',
+		'change #location-file-input': 'extractLocation',
 		'markerClick' : 'renderMarkerInfo'
 	},
 
@@ -56,6 +57,8 @@ var sidebars = Backbone.View.extend({
     				<input placeholder='choose file' type='file' class='form-button'>\
 				</div>\
 				-->\
+				<span>Upload file to see location in console</span>\
+				<input id=\"location-file-input\" type=\"file\" />\
 				<input type=\"file\" id=\"files\"/>\
 				<p id=\"status\">Please select a file</p>\
 				<div id=\"preview\"><img src=\"images/default.png\" style=\"width:300px;\" /></div>\
@@ -120,7 +123,22 @@ var sidebars = Backbone.View.extend({
 	            status_elem.innerHTML = 'Upload error: ' + status;
 	        }
     	});
-	}	
+	},
+
+	extractLocation: function(e) {
+			EXIF.getData(e.target.files[0], function() {
+	        //this needs to happen only then file < 4MB, and be jpeg
+	        var photoData = EXIF.getAllTags(this);
+	        var location = {
+	            latitude : photoData.GPSLatitude[2] + photoData.GPSLatitudeRef,
+	            longitude : photoData.GPSLongitude[2] + photoData.GPSLongitudeRef
+
+	        };
+	        // return location;
+	        console.log(location);
+	        // console.log(photoData);
+    	});
+	}
 
 
 })
