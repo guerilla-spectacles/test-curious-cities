@@ -30,7 +30,7 @@ var ScoutMap = Backbone.View.extend({
 		var mapProp = {
 		    //center:new google.maps.LatLng(45.517534,-122.648507),
 
-		    zoom:14,
+		    zoom:12,
 		    maxZoom: 18,
 		    minZoom: 6,
 	        zoomControl: true,

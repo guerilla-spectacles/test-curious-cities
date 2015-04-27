@@ -54,7 +54,7 @@ var sidebars = Backbone.View.extend({
 				<option value='Architecture'>Architecture</option>\
 				<option value='Other'>Other</option>\
 				</select>\
-				<p>Select image<br>\
+				<p>Upload an image of the location!<br>\
 				</p>\
 				<!--\
 				HOPING TO MAKE THIS DECORATIVE\
@@ -64,10 +64,10 @@ var sidebars = Backbone.View.extend({
 				</div>\
 				-->\
 				<input type=\"file\" id=\"files\"/>\
-				<p id=\"status\">Please select a file</p>\
-				<div id=\"preview\"><img src=\"images/default.png\" style=\"width:300px;\" /></div>\
+				<p id=\"status\"></p>\
+				<div id=\"preview\"><img src=\"images/uploadPlaceholder.png\" style=\"width:300px;\" /></div>\
 				<br>\
-				<input type='submit' id='save' class='center' value='Submit'>\
+				<input type='submit' id='save' value='Submit'>\
 			</form>\
 		</div>";
 

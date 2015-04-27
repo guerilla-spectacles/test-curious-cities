@@ -1,6 +1,3 @@
-//////TO DO
-// When click marker, clear sidebar and replace with info
-
 //////////////////  Fake DB for build/test purposes //////////////////
 var fakeDB = {};
 fakeDB.locations = [
@@ -22,7 +19,7 @@ fakeDB.locations = [
 		longitude: -122.63119,
 		category: 'Art'
 	},
-		{
+	{
 		title: 'Fake DB 3: Blurry Image',
 		description: 'This is a blurry mural. Not a good pucture #outoffocus',
 		curiousType: 'Stuff',
@@ -31,13 +28,31 @@ fakeDB.locations = [
 		longitude: -122.621819,
 		category: 'Art'
 	},
-			{
+	{
 		title: 'Fake DB 4: Random placeholder',
 		description: 'Placeholder picture of the Portland trailblazers.#ripcity',
 		curiousType: 'Stuff',
 		img: 'images/blazers.jpg',
 		latitude: 45.51555,
 		longitude: -122.6419,
+		category: 'Art'
+	},
+	{
+		title: 'Fake DB 5: Random placeholder',
+		description: 'Placeholder picture of the Portland trailblazers.#ripcity',
+		curiousType: 'Stuff',
+		img: 'images/blazers.jpg',
+		latitude: 45.49555,
+		longitude: -122.6419,
+		category: 'Art'
+	},
+	{
+		title: 'Fake DB 6: Random placeholder',
+		description: 'Placeholder picture of the Portland trailblazers.#ripcity',
+		curiousType: 'Stuff',
+		img: 'images/blazers.jpg',
+		latitude: 45.59555,
+		longitude: -122.7419,
 		category: 'Art'
 	}];
 
@@ -58,8 +73,9 @@ var mapLocs = new MapLocs();
 
 //////////////////  Puts all objects from fake DB in the MapLocs collection //////////////////
 mapLocs.add(fakeDB.locations);
-// console.log(mapLocs);
 
+
+///////////Delete this section? ///////////
 //////////////////  Makes view for all of the markers //////////////////
 // var AllMarkersView = Backbone.View.extend({
 // 	el: '#google-map',
@@ -105,12 +121,8 @@ var MarkerView = Backbone.View.extend({
 	render: function(){
 		for (i=0; i < fakeDB.locations.length; i++) {
 			// console.log(fakeDB.locations[i]);
-			// this.id = this.cid;
-			// console.log(this.id);
 			// console.log('"this is the marker view ID:' + this.cid);
 			var desc = fakeDB.locations[i].title;
-			// console.log(desc);
-			// console.log('hi!');
 			var latitude= fakeDB.locations[i].latitude;
 			var longitude = fakeDB.locations[i].longitude;
 			var img = fakeDB.locations[i].img;
@@ -133,7 +145,7 @@ var MarkerView = Backbone.View.extend({
 				category: fakeDB.locations[i].category,
 				id: 'markerLayer',
 			});
-		
+			console.log(marker);
 			var infowindow = new google.maps.InfoWindow();
 
 			//Close any open infoWindow if the map is clicked (don't want more than one open at a time)
