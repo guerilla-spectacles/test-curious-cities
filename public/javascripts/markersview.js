@@ -144,10 +144,11 @@ var MarkerView = Backbone.View.extend({
 
 		google.maps.event.addListener(marker, 'click', (function(marker, i) {
 			return function() {
+				var infoWindowInfo = "<div id='guide-button-div' class='info-dropdown center'><h2>Closest Curiosties</h2><div class='curiousProfile'><h3>" + fakeDB.locations[i].title + "</h3><img class='curious-img' src=" + fakeDB.locations[i].img + "><p class='curious-description'>" + fakeDB.locations[i].description + "</p><p class='curious-type'>Category:" + fakeDB.locations[i].category + '</p></div>';
 				// var inspectionNums = restaurants.results[i].inspection_number.join('_');
-				infowindow.setContent('<h4>' + 'restaurants.results[i].name' + '</h4> Score: ' +'estaurants.results[i].score'+ '<br></div>');
-				infowindow.open(map, marker);
-				var sidebar = document.getElementById('info-contents').innerHTML="butts";
+				// infowindow.setContent("<div id='guide-button-div' class='info-dropdown center'><h2>Closest Curiosties</h2><div class='curiousProfile'><h3>" + fakeDB.locations[i].title + "</h3><img class='curious-img' src=" + fakeDB.locations[i].img + "><p class='curious-description'>" + fakeDB.locations[i].description + "</p><p class='curious-type'>Category:" + fakeDB.locations[i].category + '</p></div>');
+				// infowindow.open(map, marker);
+				var sidebar = document.getElementById('info-contents').innerHTML=infoWindowInfo;
 			}
 		})(marker, i));
 		locationList.push(marker);
