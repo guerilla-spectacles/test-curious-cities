@@ -28,8 +28,6 @@ app.get('/sign_s3', function(req, res){
     var unique_name = uuid.v1();
     var s3_params = { 
         Bucket: S3_BUCKET_NAME,
-        // Name: unique_name,
-        // Key: req.query.s3_object_name,
         Key: unique_name,
         Expires: 60, 
         ContentType: req.query.s3_object_type, 
@@ -43,7 +41,6 @@ app.get('/sign_s3', function(req, res){
             var return_data = {
                 signed_request: data,
                 url: 'https://'+S3_BUCKET_NAME+'.s3.amazonaws.com/'+s3_params.Key
-                // url: 'https://'+S3_BUCKET_NAME+'.s3.amazonaws.com/'+req.query.s3_object_name 
             };
             res.write(JSON.stringify(return_data));
             res.end();
@@ -52,8 +49,7 @@ app.get('/sign_s3', function(req, res){
 });
 
     app.post('/submit_form', function(req, res){
-//     description = req.body.description;
-//     picture_url = req.body.picture_url;
+//    
         db.post('curious-data', {
             "url": req.param("picture_url"),
             "name": req.param("name"),

@@ -4,6 +4,7 @@ var sidebars = Backbone.View.extend({
 	events: {
 		'click #save' : 'save',
 		'change #file': 's3_upload',
+		'change #location-file-input': 'extractLocation',
 		'markerClick' : 'renderMarkerInfo'
 	},
 
@@ -63,6 +64,8 @@ var sidebars = Backbone.View.extend({
     				<input placeholder='choose file' type='file' class='form-button'>\
 				</div>\
 				-->\
+				<span>Upload file to see location in console</span>\
+				<input id=\"location-file-input\" type=\"file\" accept=\"image/jpeg\" />\
 				<input type=\"file\" id=\"files\"/>\
 				<p id=\"status\">Please select a file</p>\
 				<div id=\"preview\"><img src=\"images/default.png\" style=\"width:300px;\" /></div>\
@@ -131,8 +134,35 @@ var sidebars = Backbone.View.extend({
 	            status_elem.innerHTML = 'Upload error: ' + status;
 	        }
     	});
-	}	
+	},
 
+	//////////////////  Gets location data  //////////////////
+
+	extractLocation: function(e) {
+	var photoFile = e.target.files[0];
+	// if more than 1 file has been select, or if the selected file in bigger than 4MB
+	if ((e.target.files.length !== 1) || (photoFile.size > 4000000)){
+		alert("Please select a single jpeg file that is less that 4MB");
+	} else {
+			EXIF.getData(photoFile, function() {
+	        var photoData = EXIF.getAllTags(this);
+	        if (photoData.GPSLatitudeRef != null || photoData.GPSLatitudeRef != undefined){
+		        var location = {
+		            latitude : photoData.GPSLatitude[2] + photoData.GPSLatitudeRef,
+		            longitude : photoData.GPSLongitude[2] + photoData.GPSLongitudeRef
+
+		        };
+		        // return location; 
+		        console.log(location);
+		        // console.log(photoData);
+			    } 
+		    else {
+		    	alert("file contains no location data");
+		    }
+	        }
+		   )}
+
+		}
 
 })
 
