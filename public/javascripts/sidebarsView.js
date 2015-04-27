@@ -77,7 +77,11 @@ var sidebars = Backbone.View.extend({
 
 	//////////////////  Renders the sidebars //////////////////
 	render: function(which){
+
+		// document.getElementById(#info-contents).innerHTML = " ";
+		$('#info-contents').empty();
 		$('#info-contents').children().remove();
+		// $('#info-contents').innerHTML = "";
 		if (which == 'guide'){
 			$('#info-contents').append(oddity)
 		} else if (which == 'add'){

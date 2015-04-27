@@ -19,18 +19,29 @@ fakeDB.locations = [
 		curiousType: 'Stuff',
 		img: 'images/fontina.png',
 		latitude: 45.517555,
-		longitude: -122.631819,
+		longitude: -122.63119,
 		category: 'Art'
 	},
 		{
-		title: 'Fake DB 2: Blak',
+		title: 'Fake DB 3: Hi',
 		description: 'Blah blah blah, picture picture kflasjf;lasd f;alskjdf falsdkj  #ugly',
 		curiousType: 'Stuff',
 		img: 'images/fontina.png',
-		latitude: 45.577555,
-		longitude: -122.601819,
+		latitude: 45.517255,
+		longitude: -122.621819,
+		category: 'Art'
+	},
+			{
+		title: 'Fake DB 4: howdy',
+		description: 'Blah blah blah, picture picture kflasjf;lasd f;alskjdf falsdkj  #ugly',
+		curiousType: 'Stuff',
+		img: 'images/fontina.png',
+		latitude: 45.51555,
+		longitude: -122.6419,
 		category: 'Art'
 	}];
+
+var locationList = [];	
 
 //////////////////  Makes Marker model //////////////////
 var Marker = Backbone.Model.extend({
@@ -50,39 +61,32 @@ mapLocs.add(fakeDB.locations);
 // console.log(mapLocs);
 
 //////////////////  Makes view for all of the markers //////////////////
-var AllMarkersView = Backbone.View.extend({
-	el: '#google-map',
-	render: function() {
-		this.collection.each(function (marker) {
-			// console.log('making a marker');
-			var markerView = new MarkerView({model: marker});
-			// console.log('before markerView Render');
-			markerView.render();
-			// console.log(markerView);
-		});
-	},
+// var AllMarkersView = Backbone.View.extend({
+// 	el: '#google-map',
+// 	render: function() {
+// 		this.collection.each(function (marker) {
+// 			// console.log('making a marker');
+// 			var markerView = new MarkerView({model: marker});
+// 			// console.log('before markerView Render');
+// 			markerView.render();
+// 			// console.log(markerView);
+// 		});
+// 	},
 
-	initialize: function() {
-		var self = this;
-		self.render();
-		// console.log('allMarkersView hello')
-	}
-});
+// 	initialize: function() {
+// 		var self = this;
+// 		self.render();
+// 		// console.log('allMarkersView hello')
+// 	}
+// });
 
 //////////////////  Makes view for each individual marker //////////////////
 var MarkerView = Backbone.View.extend({
 	// each id
-	// el: 
+	el: "#google-map",
 	// var self = this;
 	className : 'google-map-marker',
 
-	events: {
-		'click': 'locationClick'
-	},
-
-	locationClick: function(event) {
-		console.log('clicked on a marker');
-	},
 	
 	initialize: function(opts){
 		var self = this;
@@ -99,15 +103,18 @@ var MarkerView = Backbone.View.extend({
 
 	// Render stationary middle flag
 	render: function(){
+		for (i=0; i < fakeDB.locations.length; i++) {
+		console.log(fakeDB.locations[i]);
+		console.log(fakeDB.locations[i].title);
 		// this.id = this.cid;
 		// console.log(this.id);
 		// console.log('"this is the marker view ID:' + this.cid);
-		var desc = this.model.get('description');
+		var desc = fakeDB.locations[i].title;
 		// console.log(desc);
 		// console.log('hi!');
-		var latitude= this.model.get('latitude');
-		var longitude = this.model.get('longitude');
-		var img = this.model.get('img');
+		var latitude= fakeDB.locations[i].latitude;
+		var longitude = fakeDB.locations[i].longitude;
+		var img = fakeDB.locations[i].img;
 		// console.log('this is the image' + img);
 		marker = new google.maps.Marker({
 
@@ -122,11 +129,30 @@ var MarkerView = Backbone.View.extend({
 			position: new google.maps.LatLng(latitude, longitude),
 			map: map,
 			img: img,
-			title: this.model.get('title'),
-			description: this.model.get('description'),
-			category: this.model.get('category'),
+			title: fakeDB.locations[i].title,
+			description: fakeDB.locations[i].description,
+			category: fakeDB.locations[i].category,
 			id: 'markerLayer',
 		});
+
+		var infowindow = new google.maps.InfoWindow();
+
+	//Close any open infoWindow if the map is clicked (don't want more than one open at a time)
+	google.maps.event.addListener(map, 'click', function() {
+		infowindow.close();
+	});
+
+		google.maps.event.addListener(marker, 'click', (function(marker, i) {
+			return function() {
+				// var inspectionNums = restaurants.results[i].inspection_number.join('_');
+				infowindow.setContent('<h4>' + 'restaurants.results[i].name' + '</h4> Score: ' +'estaurants.results[i].score'+ '<br></div>');
+				infowindow.open(map, marker);
+				var sidebar = document.getElementById('info-contents').innerHTML="butts";
+			}
+		})(marker, i));
+		locationList.push(marker);
+
+		};
 
 			// Makes markers clickable
 			// google.maps.event.addListener(marker, 'click', function() {
@@ -150,6 +176,5 @@ var MarkerView = Backbone.View.extend({
 		*/
 console.log("Yeah I see you");
 	// },
-
 
 
