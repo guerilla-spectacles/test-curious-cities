@@ -14,16 +14,16 @@ fakeDB.locations = [
 		category: 'Art'
 	},
 	{
-		title: 'Fake DB 2: Blak',
+		title: 'Fake DB 2: Portlandy picture',
 		description: 'Blah blah blah, picture picture kflasjf;lasd f;alskjdf falsdkj  #ugly',
 		curiousType: 'Stuff',
-		img: 'images/fontina.png',
+		img: 'images/pdx.jpg',
 		latitude: 45.517555,
 		longitude: -122.63119,
 		category: 'Art'
 	},
 		{
-		title: 'Fake DB 3: Hi',
+		title: 'Fake DB 3: Blurry Image',
 		description: 'Blah blah blah, picture picture kflasjf;lasd f;alskjdf falsdkj  #ugly',
 		curiousType: 'Stuff',
 		img: 'images/fontina.png',
@@ -32,10 +32,10 @@ fakeDB.locations = [
 		category: 'Art'
 	},
 			{
-		title: 'Fake DB 4: howdy',
+		title: 'Fake DB 4: Random placeholder',
 		description: 'Blah blah blah, picture picture kflasjf;lasd f;alskjdf falsdkj  #ugly',
 		curiousType: 'Stuff',
-		img: 'images/fontina.png',
+		img: 'images/blazers.jpg',
 		latitude: 45.51555,
 		longitude: -122.6419,
 		category: 'Art'
@@ -145,9 +145,11 @@ var MarkerView = Backbone.View.extend({
 		google.maps.event.addListener(marker, 'click', (function(marker, i) {
 			return function() {
 				var infoWindowInfo = "<div id='guide-button-div' class='info-dropdown center'><h2>Closest Curiosties</h2><div class='curiousProfile'><h3>" + fakeDB.locations[i].title + "</h3><img class='curious-img' src=" + fakeDB.locations[i].img + "><p class='curious-description'>" + fakeDB.locations[i].description + "</p><p class='curious-type'>Category:" + fakeDB.locations[i].category + '</p></div>';
-				// var inspectionNums = restaurants.results[i].inspection_number.join('_');
+
+				//////////////Info Window if we want it ///////////////
 				// infowindow.setContent("<div id='guide-button-div' class='info-dropdown center'><h2>Closest Curiosties</h2><div class='curiousProfile'><h3>" + fakeDB.locations[i].title + "</h3><img class='curious-img' src=" + fakeDB.locations[i].img + "><p class='curious-description'>" + fakeDB.locations[i].description + "</p><p class='curious-type'>Category:" + fakeDB.locations[i].category + '</p></div>');
 				// infowindow.open(map, marker);
+
 				var sidebar = document.getElementById('info-contents').innerHTML=infoWindowInfo;
 			}
 		})(marker, i));
