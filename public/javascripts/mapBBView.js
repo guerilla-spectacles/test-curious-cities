@@ -67,47 +67,7 @@ var ScoutMap = Backbone.View.extend({
 		//////////////////  Declares the actual map  //////////////////
   		self.map = new google.maps.Map(document.getElementById("google-map"),mapProp);
   		
-			//////////////////  Grabs users geolocation //////////////////
-  		    if(navigator.geolocation) {
-    			navigator.geolocation.getCurrentPosition(function(position) {
-    			console.log('grabbing location from nav');
-      			var pos = new google.maps.LatLng(position.coords.latitude,
-            		position.coords.longitude);		      		
-		      		map.setCenter(pos);
 
-				//////////////////  You are here flag //////////////////
-		      	var userLocation = new google.maps.Marker({
-		      		map: map,
-		      		position: pos,
-		      		icon: 'images/you-are-here.png',
-		      		id: 'usersLocation',
-		      		animation: google.maps.Animation.DROP,
-		      	})
-		    }, function() {
-		      handleNoGeolocation(true);
-		    });
-		    } else {
-				//////////////////  If browser doesn't allow geo, use default //////////////////
-    			handleNoGeolocation(false);
-  			};
-
-		//////////////////  Geolocation errors //////////////////		
-		function handleNoGeolocation(errorFlag) {
-  			if (errorFlag) {
-  				console.log('location found an error');
-			    var content = 'Error: The Geolocation service failed.';
-			  } else {
-			  	console.log('grabbing map from no location');
-			    var content = 'Error: Your browser doesn\'t support geolocation.';
-			  }
-			  var options = {
-			    map: map,
-			    position: new google.maps.LatLng(45.517534,-122.648507),
-			    content: content
-			  };
-			  map.setCenter(options.position);
-      	//end Geolocation	
-		};
 	},	
 
 });

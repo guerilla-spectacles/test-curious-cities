@@ -57,6 +57,7 @@ fakeDB.locations = [
 	}];
 
 var locationList = [];	
+var closestList = [];
 
 //////////////////  Makes Marker model //////////////////
 var Marker = Backbone.Model.extend({
@@ -73,6 +74,14 @@ var mapLocs = new MapLocs();
 
 //////////////////  Puts all objects from fake DB in the MapLocs collection //////////////////
 mapLocs.add(fakeDB.locations);
+
+
+
+
+		/////////////Closest Marker Attempt
+		        // find the closest location to the user's location
+        var closest = 0;
+        var mindist = 99999;
 
 
 ///////////Delete this section? ///////////
@@ -119,6 +128,58 @@ var MarkerView = Backbone.View.extend({
 
 	// Render stationary middle flag
 	render: function(){
+		// find the closest location to the user's location
+        var closest = 0;
+        var mindist = 99999;
+        var userLong;
+        var userLat;
+
+		//////////////////  Grabs users geolocation //////////////////
+	    if(navigator.geolocation) {
+			navigator.geolocation.getCurrentPosition(function(position) {
+				console.log('grabbing location from nav');
+				var pos = new google.maps.LatLng(position.coords.latitude,
+	    		position.coords.longitude);		      		
+	      		map.setCenter(pos);
+		      	userLat = position.coords.latitude;
+		      	console.log(userLat);
+		      	userLong = position.coords.longitude;
+
+				//////////////////  You are here marker //////////////////
+      			var userLocation = new google.maps.Marker({
+		      		map: map,
+		      		position: pos,
+		      		icon: 'images/you-are-here.png',
+		      		id: 'usersLocation',
+		      		animation: google.maps.Animation.DROP,
+      			})
+    		}, function() {
+      			handleNoGeolocation(true);
+    		});
+    	} else {
+			//////////////////  If browser doesn't allow geo, use default //////////////////
+			handleNoGeolocation(false);
+		};
+
+		//////////////////  Geolocation errors //////////////////		
+		function handleNoGeolocation(errorFlag) {
+  			if (errorFlag) {
+  				console.log('location found an error');
+			    var content = 'Error: The Geolocation service failed.';
+			  } else {
+			  	console.log('grabbing map from no location');
+			    var content = 'Error: Your browser doesn\'t support geolocation.';
+			  }
+			  var options = {
+			    map: map,
+			    position: new google.maps.LatLng(45.517534,-122.648507),
+			    content: content
+			  };
+			  map.setCenter(options.position);
+      	//end Geolocation	
+		};
+
+
 		for (i=0; i < fakeDB.locations.length; i++) {
 			// console.log(fakeDB.locations[i]);
 			// console.log('"this is the marker view ID:' + this.cid);
@@ -145,7 +206,8 @@ var MarkerView = Backbone.View.extend({
 				category: fakeDB.locations[i].category,
 				id: 'markerLayer',
 			});
-			console.log(marker);
+
+			// console.log(marker);
 			var infowindow = new google.maps.InfoWindow();
 
 			//Close any open infoWindow if the map is clicked (don't want more than one open at a time)
@@ -164,11 +226,15 @@ var MarkerView = Backbone.View.extend({
 
 					////////MAkes the sidebar content from the marker info
 					document.getElementById('info-contents').innerHTML=infoWindowInfo;
-				}
+				};
 		})(marker, i));
 		locationList.push(marker.title);
-		};
+		}
 		console.log(locationList);
+
+
+
+
 		// for (i = 0; i <= locationList.length; i++) {
 		// 	console.log(locationList);
 		// 	console.log("location list" + locationList[i].title);
@@ -198,5 +264,4 @@ var MarkerView = Backbone.View.extend({
 		*/
 console.log("Yeah I see you");
 	// },
-
 
