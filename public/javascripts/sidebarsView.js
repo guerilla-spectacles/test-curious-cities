@@ -22,6 +22,13 @@ var sidebars = Backbone.View.extend({
 		//makes the sidebar section
 		oddity = theCode;
 
+		///////////Working on populating the "what's nearby" list with titles from the markers
+		// <div id='guide-button-div' class='info-dropdown center'><h2>Closest Curiosties</h2>
+		// for (i = 0; i <= locationList.length; i++) {
+
+		// }
+		// console.log(locationList);
+
 		//////////////////  About Curious Cities Sidebar//////////////////
 		about = "<div id=\"about-button-div\" class=\"info-dropdown center\">\
 			<h2>About Curious Cities</h2>\
@@ -80,7 +87,11 @@ var sidebars = Backbone.View.extend({
 
 	//////////////////  Renders the sidebars //////////////////
 	render: function(which){
+
+		// document.getElementById(#info-contents).innerHTML = " ";
+		$('#info-contents').empty();
 		$('#info-contents').children().remove();
+		// $('#info-contents').innerHTML = "";
 		if (which == 'guide'){
 			$('#info-contents').append(oddity)
 		} else if (which == 'add'){
