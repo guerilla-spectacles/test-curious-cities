@@ -90,4 +90,3 @@ var ScoutMap = Backbone.View.extend({
 //   		moveMarker.setMap(map); 
 // 	},
 // })
-
