@@ -59,14 +59,7 @@ fakeDB.locations = [
 var locationList = [];	
 var closestList = [];
 
-//////////////////  Makes Marker model //////////////////
-var Marker = Backbone.Model.extend({
-	initialize: function() {
-		var markyMark = new MarkerView({model: this});
-	}
-	//initializie: make view, which renders the view
 
-});
 
 // var allMarkersView = new 
 
@@ -109,6 +102,8 @@ mapLocs.add(fakeDB.locations);
 // 		// console.log('allMarkersView hello')
 // 	}
 // });
+
+
 
 //////////////////  Makes view for each individual marker //////////////////
 var MarkerView = Backbone.View.extend({
@@ -157,7 +152,7 @@ var MarkerView = Backbone.View.extend({
 			marker = new google.maps.Marker({
 				icon: 'images/map-marker-image.png',
 				position: new google.maps.LatLng(latitude, longitude),
-				map: map,
+				map: this.map,
 				img: img,
 				title: title,
 				description: desc,
@@ -191,7 +186,7 @@ var MarkerView = Backbone.View.extend({
 		// }
 		// console.log(locationList);
 
-
+	},
 
 
 
@@ -216,12 +211,23 @@ var MarkerView = Backbone.View.extend({
 		 //    this.getPanes().markerLayer.id='markerLayer';
 		 // };
 		 // myoverlay.setMap(map);
-	}});    
+	});    
 			/*var flag = new google.maps.Marker({
 				position: map.center, 
 		});
 		flag.setMap(self.map);
 		*/
+//////////////////  Makes Marker model //////////////////
+var Marker = Backbone.Model.extend({
+	initialize: function() {
+		var markyMark = new MarkerView({model: this});
+		console.log('hi from marker init');
+	}
+	//initializie: make view, which renders the view
+
+});
+
+
 console.log("Yeah I see you");
 	// },
 
