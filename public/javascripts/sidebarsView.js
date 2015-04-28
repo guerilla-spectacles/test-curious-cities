@@ -47,11 +47,11 @@ var sidebars = Backbone.View.extend({
 		addLoc = "<div id=\"add-button-div\" class=\"info-dropdown center\">\
 			<h2>Add a new location</h2>\
 			<form>\
-				<input type='text' required name='location-name' placeholder='Location name'>\
+				<input type='text' id='locationName' required name='location-name' placeholder='Location name'>\
 				<br>\
 				<textarea id='description' name='location-description' maxlength='140' placeholder='Description'></textarea>\
 				<br>\
-				<select name='oddity-type'>\
+				<select id='catType' name='oddity-type'>\
 				<option value='Unspecified'>Category</option>\
 				<option value='Art'>Art</option>\
 				<option value='Nature'>Nature</option>\
@@ -64,7 +64,7 @@ var sidebars = Backbone.View.extend({
 				HOPING TO MAKE THIS DECORATIVE\
 				<div class='fileUpload' required>\
     				<span>Upload</span>\
-    				<input placeholder='choose file' type='file' class='form-button'>\
+    				<input placeholder='choose file' id='selectedFile' type='file' class='form-button'>\
 				</div>\
 				-->\
 				<span>Upload file to see location in console</span>\
@@ -108,8 +108,17 @@ var sidebars = Backbone.View.extend({
 
 	//////////////////  Controls the sumbit/save button event //////////////////
 	save: function(event){
+		event.preventDefault();
+		var $locationName = $(this.el).find('#locationName').val();
+		var $locationDesc = $(this.el).find('#description').val();
+		var $categoryType = $(":selected").val();
+		var $locationURL = $(this.el).find("#status").val();
 		//event.preventDefault();
 		console.log('yep, got a click');
+		console.log($locationName);
+		console.log($locationDesc);
+		console.log($categoryType);
+		//console.log($locationURL);
 		//var photoLoc = $('#photoInput').get(0).files[0];
 		//console.log(photoLoc);
 	// 	(function() {
@@ -173,14 +182,24 @@ var sidebars = Backbone.View.extend({
 			            status_elem.innerHTML = 'Upload completed. Uploaded to: '+ public_url;
 			            // url_elem.value = public_url;
 			            preview_elem.innerHTML = '<img src="'+public_url+'" style="width:300px;" />';
-			            console.log(public_url);
+			            //console.log(public_url);
+			            var publicURL = public_url;
+			            $(this.el).find("#status").val(public_url);
+			            var $statusID = $(this.el).find("#status");
+			            console.log($statusID);
+			            console.log('here we go');
+			            console.log(publicURL);
+			            //$(this.el).find("#status").val(public_url); //add public url to html id
 			        },
 			        onError: function(status) {
 			            status_elem.innerHTML = 'Upload error: ' + status;
 			        }
 		    	});
+
+		    	//$locationURL.val('changed location value');
+		    	//console.log($locationURL).val();
 		        // return location; 
-		        console.log(location);
+		        //console.log(location);
 
 		        // console.log(photoData);
 			    } 
