@@ -61,6 +61,11 @@ var closestList = [];
 
 //////////////////  Makes Marker model //////////////////
 var Marker = Backbone.Model.extend({
+	initialize: function() {
+		var markyMark = new MarkerView({model: this});
+	}
+	//initializie: make view, which renders the view
+
 });
 
 // var allMarkersView = new 
@@ -68,14 +73,14 @@ var Marker = Backbone.Model.extend({
 //////////////////  Makes collection for all map locations //////////////////
 var MapLocs = Backbone.Collection.extend({
 	model: Marker,
-	comparator: 'cid'
+	comparator: 'cid',
+	url: '/api'
 });
 var mapLocs = new MapLocs();
 
+
 //////////////////  Puts all objects from fake DB in the MapLocs collection //////////////////
 mapLocs.add(fakeDB.locations);
-
-
 
 
 		/////////////Closest Marker Attempt
@@ -93,7 +98,7 @@ mapLocs.add(fakeDB.locations);
 // 			// console.log('making a marker');
 // 			var markerView = new MarkerView({model: marker});
 // 			// console.log('before markerView Render');
-// 			markerView.render();
+// 			// markerView.render();
 // 			// console.log(markerView);
 // 		});
 // 	},
@@ -122,74 +127,29 @@ var MarkerView = Backbone.View.extend({
 		// console.log(map);
 	},
 
-	placeMarker: function(){
-		console.log("Hi from placeMarker");
-	},
+	// placeMarker: function(){
+	// 	console.log("Hi from placeMarker");
+	// },
 
 	// Render stationary middle flag
 	render: function(){
 		// find the closest location to the user's location
-        var closest = 0;
-        var mindist = 99999;
-        var mapVariables = {
-        	userLong: null,
-        	userLat: null,
-        	LatLng: null
-        }
-
-		//////////////////  Grabs users geolocation //////////////////
-	    if(navigator.geolocation) {
-			navigator.geolocation.getCurrentPosition(function(position) {
-				console.log('grabbing location from nav');
-				var pos = new google.maps.LatLng(position.coords.latitude,
-	    		position.coords.longitude);		      		
-	      		map.setCenter(pos);
+        // var closest = 0;
+        // var mindist = 99999;
+        // var mapVariables = {
+        // 	userLong: null,
+        // 	userLat: null,
+        // 	LatLng: null
+        // }
 
 
-				//////////////////  You are here marker //////////////////
-      			var userLocation = new google.maps.Marker({
-		      		map: map,
-		      		position: pos,
-		      		icon: 'images/you-are-here.png',
-		      		id: 'usersLocation',
-		      		animation: google.maps.Animation.DROP,
-
-      			});
-      			mapVariables.userLat = position.coords.latitude;
-		      	mapVariables.userLong = position.coords.longitude;
-		      	mapVariables.LatLng = (position.coords.latitude, position.coords.longitude);
-      					      	// return pos;	
-    		}, function() {
-      			handleNoGeolocation(true);
-    		});
-    	} else {
-			//////////////////  If browser doesn't allow geo, use default //////////////////
-			handleNoGeolocation(false);
-		};
-
-		//////////////////  Geolocation errors //////////////////		
-		function handleNoGeolocation(errorFlag) {
-  			if (errorFlag) {
-  				console.log('location found an error');
-			    var content = 'Error: The Geolocation service failed.';
-			} else {
-			  	console.log('grabbing map from no location');
-			    var content = 'Error: Your browser doesn\'t support geolocation.';
-			}
-		var options = {
-			map: map,
-			position: new google.maps.LatLng(45.517534,-122.648507),
-			content: content
-		};
-		map.setCenter(options.position);
-      	//end Geolocation	
-		};
-
-		for (i=0; i < fakeDB.locations.length; i++) {
-			var desc = fakeDB.locations[i].title;
-			var latitude= fakeDB.locations[i].latitude;
-			var longitude = fakeDB.locations[i].longitude;
-			var img = fakeDB.locations[i].img;
+		// for (i=0; i < fakeDB.locations.length; i++) {
+			var desc = this.model.get('description');
+			var latitude= this.model.get('latitude');
+			var longitude = this.model.get('longitude');
+			var img = this.model.get('img');
+			var category = this.model.get('category');
+			var title = this.model.get('title');
 			// var thisLatLng = (latitude, longitude);
 
 
@@ -199,9 +159,9 @@ var MarkerView = Backbone.View.extend({
 				position: new google.maps.LatLng(latitude, longitude),
 				map: map,
 				img: img,
-				title: fakeDB.locations[i].title,
-				description: fakeDB.locations[i].description,
-				category: fakeDB.locations[i].category,
+				title: title,
+				description: desc,
+				category: category,
 				id: 'markerLayer',
 			});
 			// console.log(mapVariables.userLat);
@@ -217,7 +177,7 @@ var MarkerView = Backbone.View.extend({
 			google.maps.event.addListener(marker, 'click', (function(marker, i) {
 				return function() {
 
-					var infoWindowInfo = "<div id='guide-button-div' class='info-dropdown center'><h2>Closest Curiosties</h2><div class='curiousProfile'><h3>" + fakeDB.locations[i].title + "</h3><img class='curious-img' src=" + fakeDB.locations[i].img + "><p class='curious-description'>" + fakeDB.locations[i].description + "</p><p class='curious-type'>Category:<br>" + fakeDB.locations[i].category + '</p></div>';
+					var infoWindowInfo = "<div id='guide-button-div' class='info-dropdown center'><h2>Closest Curiosties</h2><div class='curiousProfile'><h3>" + title + "</h3><img class='curious-img' src=" + img + "><p class='curious-description'>" + description + "</p><p class='curious-type'>Category:<br>" + category + '</p></div>';
 
 					//////////////Info Window if we want it ///////////////
 					// infowindow.setContent("<div id='guide-button-div' class='info-dropdown center'><h2>Closest Curiosties</h2><div class='curiousProfile'><h3>" + fakeDB.locations[i].title + "</h3><img class='curious-img' src=" + fakeDB.locations[i].img + "><p class='curious-description'>" + fakeDB.locations[i].description + "</p><p class='curious-type'>Category:" + fakeDB.locations[i].category + '</p></div>');
@@ -226,10 +186,10 @@ var MarkerView = Backbone.View.extend({
 					////////MAkes the sidebar content from the marker info
 					document.getElementById('info-contents').innerHTML=infoWindowInfo;
 				};
-			})(marker, i));
+			})(marker));
 			locationList.push(marker.title);
-		}
-		console.log(locationList);
+		// }
+		// console.log(locationList);
 
 
 

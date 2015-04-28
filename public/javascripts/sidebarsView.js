@@ -118,6 +118,14 @@ var sidebars = Backbone.View.extend({
 		var $locationURL = $(this.el).find("#locationURL").html();
 		var $locationLatitude = $(this.el).find("#latitideP").html();
 		var $locationLongitude = $(this.el).find("#longitudeP").html();
+		var newMarker = {
+				img: ($locationURL),
+				title: ($locationName),
+				description: ($locationDesc ),
+				category: ($categoryType),
+				latitude: ($locationLatitude),
+				longitude: ($locationLongitude)
+			}
 		//event.preventDefault();
 		console.log('yep, got a click');
 		console.log($locationName);
@@ -126,6 +134,26 @@ var sidebars = Backbone.View.extend({
 		console.log($locationURL);
 		console.log($locationLongitude);
 		console.log($locationLatitude);
+
+
+		toMap = function() {
+
+
+			///////FOR WHEN ORCHESTRATE IS SET UP!
+			// mapLocs.create(newMarker);
+
+			//////////Delete when orchestrate is set up
+			collection.add(newMarker);
+
+			
+				// var newMarkerView = new MarkerView({model: newMarker});
+			// console.log('before markerView Render');
+		};
+		toMap();
+
+		toOrchestrate = function(){
+
+		};
 		//console.log($locationURL);
 		//var photoLoc = $('#photoInput').get(0).files[0];
 		//console.log(photoLoc);
