@@ -1,3 +1,114 @@
+//////////////////  Makes view for each individual marker //////////////////
+var MarkerView = Backbone.View.extend({
+	// each id
+	el: "#google-map",
+	// var self = this;
+	className : 'google-map-marker',
+
+	
+	initialize: function(opts){
+		console.log(opts.model);
+		var self = this;
+		self.map = opts.map;
+		// console.log(self);
+		self.render();
+		// console.log('here is map after installing from opts');
+		// console.log(map);
+	},
+
+	// placeMarker: function(){
+	// 	console.log("Hi from placeMarker");
+	// },
+
+	// Render stationary middle flag
+	render: function(){
+		// find the closest location to the user's location
+        // var closest = 0;
+        // var mindist = 99999;
+        // var mapVariables = {
+        // 	userLong: null,
+        // 	userLat: null,
+        // 	LatLng: null
+        // }
+        console.log(this.model);
+
+
+		// for (i=0; i < fakeDB.locations.length; i++) {
+			var desc = this.model.get('description');
+			var latitude= this.model.get('latitude');
+			var longitude = this.model.get('longitude');
+			var img = this.model.get('img');
+			var category = this.model.get('category');
+			var title = this.model.get('title');
+			// var thisLatLng = (latitude, longitude);
+
+
+
+			marker = new google.maps.Marker({
+				icon: 'images/map-marker-image.png',
+				position: new google.maps.LatLng(latitude, longitude),
+				map: this.map,
+				img: img,
+				title: title,
+				description: desc,
+				category: category,
+				id: 'markerLayer',
+			});
+			// console.log(mapVariables.userLat);
+
+			// console.log(marker);
+			var infowindow = new google.maps.InfoWindow();
+
+			//Close any open infoWindow if the map is clicked (don't want more than one open at a time)
+			// google.maps.event.addListener(this.map, 'click', function() {
+			// 	infowindow.close();
+			// });
+
+			google.maps.event.addListener(marker, 'click', (function(marker) {
+				return function() {
+
+					var infoWindowInfo = "<div id='guide-button-div' class='info-dropdown center'><h2>Closest Curiosties</h2><div class='curiousProfile'><h3>" + title + "</h3><img class='curious-img' src=" + img + "><p class='curious-description'>" + description + "</p><p class='curious-type'>Category:<br>" + category + '</p></div>';
+
+					//////////////Info Window if we want it ///////////////
+					// infowindow.setContent("<div id='guide-button-div' class='info-dropdown center'><h2>Closest Curiosties</h2><div class='curiousProfile'><h3>" + fakeDB.locations[i].title + "</h3><img class='curious-img' src=" + fakeDB.locations[i].img + "><p class='curious-description'>" + fakeDB.locations[i].description + "</p><p class='curious-type'>Category:" + fakeDB.locations[i].category + '</p></div>');
+					// infowindow.open(map, marker);
+
+					////////MAkes the sidebar content from the marker info
+					document.getElementById('info-contents').innerHTML=infoWindowInfo;
+				};
+			})(marker));
+			locationList.push(marker.title);
+		// }
+		// console.log(locationList);
+
+
+
+
+
+		// for (i = 0; i <= locationList.length; i++) {
+		// 	console.log(locationList);
+		// 	console.log("location list" + locationList[i].title);
+		// };
+
+
+
+			// Makes markers clickable
+			// google.maps.event.addListener(marker, 'click', function() {
+			// // map.setZoom(8);
+			// // console.log('before move');
+			// map.setCenter(marker.getPosition());
+			// console.log(marker.description);
+			// });
+			// ADDS INFO WINDOW TO MARKER  
+			// link = '';            bindInfoWindow(marker, map, locations[i][0], description, telephone, email, web, link);
+		 //  var myoverlay = new google.maps.OverlayView();
+		 //   myoverlay.draw = function () {
+		 //    this.getPanes().markerLayer.id='markerLayer';
+		 // };
+		 // myoverlay.setMap(map);
+	}});    
+
+
 //////////////////  Fake DB for build/test purposes //////////////////
 var fakeDB = {};
 fakeDB.locations = [
@@ -110,113 +221,7 @@ mapLocs.add(fakeDB.locations);
 // 	}
 // });
 
-//////////////////  Makes view for each individual marker //////////////////
-var MarkerView = Backbone.View.extend({
-	// each id
-	el: "#google-map",
-	// var self = this;
-	className : 'google-map-marker',
 
-	
-	initialize: function(opts){
-		var self = this;
-		self.map = opts.map;
-		// console.log(self);
-		self.render();
-		// console.log('here is map after installing from opts');
-		// console.log(map);
-	},
-
-	// placeMarker: function(){
-	// 	console.log("Hi from placeMarker");
-	// },
-
-	// Render stationary middle flag
-	render: function(){
-		// find the closest location to the user's location
-        // var closest = 0;
-        // var mindist = 99999;
-        // var mapVariables = {
-        // 	userLong: null,
-        // 	userLat: null,
-        // 	LatLng: null
-        // }
-
-
-		// for (i=0; i < fakeDB.locations.length; i++) {
-			var desc = this.model.get('description');
-			var latitude= this.model.get('latitude');
-			var longitude = this.model.get('longitude');
-			var img = this.model.get('img');
-			var category = this.model.get('category');
-			var title = this.model.get('title');
-			// var thisLatLng = (latitude, longitude);
-
-
-
-			marker = new google.maps.Marker({
-				icon: 'images/map-marker-image.png',
-				position: new google.maps.LatLng(latitude, longitude),
-				map: map,
-				img: img,
-				title: title,
-				description: desc,
-				category: category,
-				id: 'markerLayer',
-			});
-			// console.log(mapVariables.userLat);
-
-			// console.log(marker);
-			var infowindow = new google.maps.InfoWindow();
-
-			//Close any open infoWindow if the map is clicked (don't want more than one open at a time)
-			google.maps.event.addListener(map, 'click', function() {
-				infowindow.close();
-			});
-
-			google.maps.event.addListener(marker, 'click', (function(marker, i) {
-				return function() {
-
-					var infoWindowInfo = "<div id='guide-button-div' class='info-dropdown center'><h2>Closest Curiosties</h2><div class='curiousProfile'><h3>" + title + "</h3><img class='curious-img' src=" + img + "><p class='curious-description'>" + description + "</p><p class='curious-type'>Category:<br>" + category + '</p></div>';
-
-					//////////////Info Window if we want it ///////////////
-					// infowindow.setContent("<div id='guide-button-div' class='info-dropdown center'><h2>Closest Curiosties</h2><div class='curiousProfile'><h3>" + fakeDB.locations[i].title + "</h3><img class='curious-img' src=" + fakeDB.locations[i].img + "><p class='curious-description'>" + fakeDB.locations[i].description + "</p><p class='curious-type'>Category:" + fakeDB.locations[i].category + '</p></div>');
-					// infowindow.open(map, marker);
-
-					////////MAkes the sidebar content from the marker info
-					document.getElementById('info-contents').innerHTML=infoWindowInfo;
-				};
-			})(marker));
-			locationList.push(marker.title);
-		// }
-		// console.log(locationList);
-
-
-
-
-
-		// for (i = 0; i <= locationList.length; i++) {
-		// 	console.log(locationList);
-		// 	console.log("location list" + locationList[i].title);
-		// };
-
-
-
-			// Makes markers clickable
-			// google.maps.event.addListener(marker, 'click', function() {
-			// // map.setZoom(8);
-			// // console.log('before move');
-			// map.setCenter(marker.getPosition());
-			// console.log(marker.description);
-			// });
-			// ADDS INFO WINDOW TO MARKER  
-			// link = '';            bindInfoWindow(marker, map, locations[i][0], description, telephone, email, web, link);
-		 //  var myoverlay = new google.maps.OverlayView();
-		 //   myoverlay.draw = function () {
-		 //    this.getPanes().markerLayer.id='markerLayer';
-		 // };
-		 // myoverlay.setMap(map);
-	}});    
 			/*var flag = new google.maps.Marker({
 				position: map.center, 
 		});
