@@ -97,11 +97,12 @@ button:hover {
   background-color: red;
   text-align: center; }
 
-#guide-button-div .curious-img {
+img {
   width: auto;
   max-width: 100%;
   height: auto;
   max-height: 300px; }
+
 #guide-button-div .curious-description {
   color: #005A6C; }
 #guide-button-div .curious-type {

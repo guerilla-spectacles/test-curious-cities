@@ -14,6 +14,13 @@
   transform: translateY(-50%);
 }
 
+@mixin image-sizer {
+    width: auto;
+    max-width: 100%;
+    height: auto;
+    max-height: 300px;
+}
+
 @mixin border-radius {
   border-radius: 5px;
 }
@@ -167,15 +174,16 @@ button:hover {
     text-align: center;
 }
 
-//////////////Curiousity Pane /////////
-
-#guide-button-div {
-  .curious-img {
+img {
     width: auto;
     max-width: 100%;
     height: auto;
     max-height: 300px;
-  }
+}
+
+//////////////Curiousity Pane /////////
+
+#guide-button-div {
   .curious-description {
     color: $dark-blue;
   }

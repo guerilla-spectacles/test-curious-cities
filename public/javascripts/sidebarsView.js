@@ -3,7 +3,7 @@ var sidebars = Backbone.View.extend({
 	el: '#info-contents',
 	events: {
 		'click #save' : 'save',
-		'change #file': 's3_upload',
+		'change #files': 's3_upload',
 		'change #location-file-input': 'extractLocation',
 		'markerClick' : 'renderMarkerInfo'
 	},
