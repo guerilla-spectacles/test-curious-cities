@@ -174,16 +174,14 @@ button:hover {
     text-align: center;
 }
 
-img {
-    width: auto;
-    max-width: 100%;
-    height: auto;
-    max-height: 300px;
-}
+
 
 //////////////Curiousity Pane /////////
 
 #guide-button-div {
+  .curious-img {
+    @include image-sizer;
+  }
   .curious-description {
     color: $dark-blue;
   }
@@ -193,6 +191,11 @@ img {
   }
 }
 
+#preview {
+  img {
+    @include image-sizer;
+  }
+}
 
 //////ADD FORM STYLES
 #{$all-text-inputs} {

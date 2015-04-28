@@ -3,7 +3,8 @@ var sidebars = Backbone.View.extend({
 	el: '#info-contents',
 	events: {
 		'click #save' : 'save',
-		'change #files': 's3_upload',
+		// 'click #save' : 'test',
+		// 'change #location-file-input': 's3_upload',
 		'change #location-file-input': 'extractLocation',
 		'markerClick' : 'renderMarkerInfo'
 	},
@@ -21,6 +22,8 @@ var sidebars = Backbone.View.extend({
 
 		//makes the sidebar section
 		oddity = theCode;
+
+		var $name     
 
 		///////////Working on populating the "what's nearby" list with titles from the markers
 		// <div id='guide-button-div' class='info-dropdown center'><h2>Closest Curiosties</h2>
@@ -66,7 +69,6 @@ var sidebars = Backbone.View.extend({
 				-->\
 				<span>Upload file to see location in console</span>\
 				<input id=\"location-file-input\" type=\"file\" accept=\"image/jpeg\" />\
-				<input type=\"file\" id=\"files\"/>\
 				<p id=\"status\"></p>\
 				<div id=\"preview\"><img src=\"images/uploadPlaceholder.png\" style=\"width:300px;\" /></div>\
 				<br>\
@@ -102,6 +104,8 @@ var sidebars = Backbone.View.extend({
 
 	},
 
+
+
 	//////////////////  Controls the sumbit/save button event //////////////////
 	save: function(event){
 		//event.preventDefault();
@@ -115,26 +119,28 @@ var sidebars = Backbone.View.extend({
 	},
 
 	//////////////////  Controls the upload  //////////////////
-	s3_upload: function() {
-		var status_elem = document.getElementById("status");
-	    var url_elem = document.getElementById("picture_url");
-	    var preview_elem = document.getElementById("preview");
-	    var s3upload = new S3Upload({
-	        file_dom_selector: 'files',
-	        s3_sign_put_url: '/sign_s3',
-	        onProgress: function(percent, message) {
-	            status_elem.innerHTML = 'Upload progress: ' + percent + '% ' + message;
-	        },
-	        onFinishS3Put: function(public_url) {
-	            status_elem.innerHTML = 'Upload completed. Uploaded to: '+ public_url;
-	            url_elem.value = public_url;
-	            preview_elem.innerHTML = '<img src="'+public_url+'" style="width:300px;" />';
-	        },
-	        onError: function(status) {
-	            status_elem.innerHTML = 'Upload error: ' + status;
-	        }
-    	});
-	},
+	// s3_upload: function() {
+	// 	        ////////s#_upload ////////////////
+	// 	        var status_elem = document.getElementById("status");
+	// 		    // var url_elem = document.getElementById("picture_url");
+	// 		    var preview_elem = document.getElementById("preview");
+	// 		    var s3upload = new S3Upload({
+	// 		        file_dom_selector: 'location-file-input',
+	// 		        s3_sign_put_url: '/sign_s3',
+	// 		        onProgress: function(percent, message) {
+	// 		            status_elem.innerHTML = 'Upload progress: ' + percent + '% ' + message;
+	// 		        },
+	// 		        onFinishS3Put: function(public_url) {
+	// 		            status_elem.innerHTML = 'Upload completed. Uploaded to: '+ public_url;
+	// 		            // url_elem.value = public_url;
+	// 		            preview_elem.innerHTML = '<img src="'+public_url+'" style="width:300px;" />';
+	// 		            console.log(public_url);
+	// 		        },
+	// 		        onError: function(status) {
+	// 		            status_elem.innerHTML = 'Upload error: ' + status;
+	// 		        }
+	// 	    	});
+	// },
 
 	//////////////////  Gets location data  //////////////////
 
@@ -152,17 +158,39 @@ var sidebars = Backbone.View.extend({
 		            longitude : photoData.GPSLongitude[2] + photoData.GPSLongitudeRef
 
 		        };
+
+		        ////////s#_upload ////////////////
+		        var status_elem = document.getElementById("status");
+			    // var url_elem = document.getElementById("picture_url");
+			    var preview_elem = document.getElementById("preview");
+			    var s3upload = new S3Upload({
+			        file_dom_selector: 'location-file-input',
+			        s3_sign_put_url: '/sign_s3',
+			        onProgress: function(percent, message) {
+			            status_elem.innerHTML = 'Upload progress: ' + percent + '% ' + message;
+			        },
+			        onFinishS3Put: function(public_url) {
+			            status_elem.innerHTML = 'Upload completed. Uploaded to: '+ public_url;
+			            // url_elem.value = public_url;
+			            preview_elem.innerHTML = '<img src="'+public_url+'" style="width:300px;" />';
+			            console.log(public_url);
+			        },
+			        onError: function(status) {
+			            status_elem.innerHTML = 'Upload error: ' + status;
+			        }
+		    	});
 		        // return location; 
 		        console.log(location);
+
 		        // console.log(photoData);
 			    } 
-		    else {
-		    	alert("file contains no location data");
-		    }
+		    	else {
+		    		alert("file contains no location data");
+		    	}
 	        }
-		   )}
+		)}
 
-		}
+	}
 
 })
 
