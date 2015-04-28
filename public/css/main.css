@@ -84,7 +84,8 @@ button {
   background-color: transparent;
   color: white;
   margin: auto;
-  padding: 0; }
+  padding: 0;
+  font-size: 15px; }
 
 button:hover {
   color: #005A6C; }
@@ -96,11 +97,12 @@ button:hover {
   background-color: red;
   text-align: center; }
 
-#guide-button-div .curious-img {
+img {
   width: auto;
   max-width: 100%;
   height: auto;
   max-height: 300px; }
+
 #guide-button-div .curious-description {
   color: #005A6C; }
 #guide-button-div .curious-type {
@@ -148,12 +150,16 @@ form #description {
 form select {
   border: none;
   margin: 15px auto;
-  background-color: #B5F8FF; }
+  background-color: #B5F8FF;
+  padding: 10px;
+  width: 100%; }
 form input[type="submit"] {
-  background-color: #005A6C;
+  background-color: #00C7DE;
   color: white;
   border: none;
-  border-radius: 5px; }
+  border-radius: 5px;
+  font-size: 16px;
+  padding: 10px; }
 form input[type="file"] {
   color: transparent; }
 
@@ -182,6 +188,9 @@ form input[type="file"] {
   border-radius: 5px; }
 
 @media screen and (min-width: 600px) {
+  html {
+    font-size: 16px; }
+
   .info-dropdown {
     height: 90vh; }
 

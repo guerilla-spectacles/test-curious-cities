@@ -14,6 +14,13 @@
   transform: translateY(-50%);
 }
 
+@mixin image-sizer {
+    width: auto;
+    max-width: 100%;
+    height: auto;
+    max-height: 300px;
+}
+
 @mixin border-radius {
   border-radius: 5px;
 }
@@ -151,6 +158,7 @@ button {
   color: white;
   margin: auto;
   padding: 0;
+  font-size: 15px;
 }
 
 button:hover {
@@ -166,15 +174,16 @@ button:hover {
     text-align: center;
 }
 
-//////////////Curiousity Pane /////////
-
-#guide-button-div {
-  .curious-img {
+img {
     width: auto;
     max-width: 100%;
     height: auto;
     max-height: 300px;
-  }
+}
+
+//////////////Curiousity Pane /////////
+
+#guide-button-div {
   .curious-description {
     color: $dark-blue;
   }
@@ -241,13 +250,17 @@ form {
     border: none;
     @include standard-margin;
     background-color: $light-blue;
+    padding: 10px;
+    width: 100%;
   };
 
   input[type="submit"] {
-    background-color: $dark-blue;
+    background-color: $blue;
     color: white;
     border: none;
     @include border-radius;
+    font-size: 16px;
+    padding: 10px;
   };
   input[type="file"] {
     color: transparent;
@@ -296,7 +309,7 @@ form {
 
 @media screen and (min-width: 600px){
   html{
-    // font-size: 16px;
+    font-size: 16px;
   }
     .info-dropdown {
     height: 90vh;

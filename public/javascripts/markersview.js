@@ -1,6 +1,3 @@
-//////TO DO
-// When click marker, clear sidebar and replace with info
-
 //////////////////  Fake DB for build/test purposes //////////////////
 var fakeDB = {};
 fakeDB.locations = [
@@ -22,7 +19,7 @@ fakeDB.locations = [
 		longitude: -122.63119,
 		category: 'Art'
 	},
-		{
+	{
 		title: 'Fake DB 3: Blurry Image',
 		description: 'This is a blurry mural. Not a good pucture #outoffocus',
 		curiousType: 'Stuff',
@@ -31,7 +28,7 @@ fakeDB.locations = [
 		longitude: -122.621819,
 		category: 'Art'
 	},
-			{
+	{
 		title: 'Fake DB 4: Random placeholder',
 		description: 'Placeholder picture of the Portland trailblazers.#ripcity',
 		curiousType: 'Stuff',
@@ -39,9 +36,28 @@ fakeDB.locations = [
 		latitude: 45.51555,
 		longitude: -122.6419,
 		category: 'Art'
+	},
+	{
+		title: 'Fake DB 5: Random placeholder',
+		description: 'Placeholder picture of the Portland trailblazers.#ripcity',
+		curiousType: 'Stuff',
+		img: 'images/blazers.jpg',
+		latitude: 45.49555,
+		longitude: -122.6419,
+		category: 'Art'
+	},
+	{
+		title: 'Fake DB 6: Random placeholder',
+		description: 'Placeholder picture of the Portland trailblazers.#ripcity',
+		curiousType: 'Stuff',
+		img: 'images/blazers.jpg',
+		latitude: 45.59555,
+		longitude: -122.7419,
+		category: 'Art'
 	}];
 
 var locationList = [];	
+var closestList = [];
 
 //////////////////  Makes Marker model //////////////////
 var Marker = Backbone.Model.extend({
@@ -58,8 +74,17 @@ var mapLocs = new MapLocs();
 
 //////////////////  Puts all objects from fake DB in the MapLocs collection //////////////////
 mapLocs.add(fakeDB.locations);
-// console.log(mapLocs);
 
+
+
+
+		/////////////Closest Marker Attempt
+		        // find the closest location to the user's location
+        var closest = 0;
+        var mindist = 99999;
+
+
+///////////Delete this section? ///////////
 //////////////////  Makes view for all of the markers //////////////////
 // var AllMarkersView = Backbone.View.extend({
 // 	el: '#google-map',
@@ -103,27 +128,73 @@ var MarkerView = Backbone.View.extend({
 
 	// Render stationary middle flag
 	render: function(){
+		// find the closest location to the user's location
+        var closest = 0;
+        var mindist = 99999;
+        var mapVariables = {
+        	userLong: null,
+        	userLat: null,
+        	LatLng: null
+        }
+
+		//////////////////  Grabs users geolocation //////////////////
+	    if(navigator.geolocation) {
+			navigator.geolocation.getCurrentPosition(function(position) {
+				console.log('grabbing location from nav');
+				var pos = new google.maps.LatLng(position.coords.latitude,
+	    		position.coords.longitude);		      		
+	      		map.setCenter(pos);
+
+
+				//////////////////  You are here marker //////////////////
+      			var userLocation = new google.maps.Marker({
+		      		map: map,
+		      		position: pos,
+		      		icon: 'images/you-are-here.png',
+		      		id: 'usersLocation',
+		      		animation: google.maps.Animation.DROP,
+
+      			});
+      			mapVariables.userLat = position.coords.latitude;
+		      	mapVariables.userLong = position.coords.longitude;
+		      	mapVariables.LatLng = (position.coords.latitude, position.coords.longitude);
+      					      	// return pos;	
+    		}, function() {
+      			handleNoGeolocation(true);
+    		});
+    	} else {
+			//////////////////  If browser doesn't allow geo, use default //////////////////
+			handleNoGeolocation(false);
+		};
+
+		//////////////////  Geolocation errors //////////////////		
+		function handleNoGeolocation(errorFlag) {
+  			if (errorFlag) {
+  				console.log('location found an error');
+			    var content = 'Error: The Geolocation service failed.';
+			} else {
+			  	console.log('grabbing map from no location');
+			    var content = 'Error: Your browser doesn\'t support geolocation.';
+			}
+		var options = {
+			map: map,
+			position: new google.maps.LatLng(45.517534,-122.648507),
+			content: content
+		};
+		map.setCenter(options.position);
+      	//end Geolocation	
+		};
+
 		for (i=0; i < fakeDB.locations.length; i++) {
-			// console.log(fakeDB.locations[i]);
-			// this.id = this.cid;
-			// console.log(this.id);
-			// console.log('"this is the marker view ID:' + this.cid);
 			var desc = fakeDB.locations[i].title;
-			// console.log(desc);
-			// console.log('hi!');
 			var latitude= fakeDB.locations[i].latitude;
 			var longitude = fakeDB.locations[i].longitude;
 			var img = fakeDB.locations[i].img;
-			// console.log('this is the image' + img);
-			marker = new google.maps.Marker({
+			// var thisLatLng = (latitude, longitude);
 
-			//Google maps API stuff, helps prevent bugs.	
-			// if (this.model.get('description') =='undefined'){ description ='';} else { description = this.model.get('description');}
-			// if (this.model.telephone =='undefined'){ telephone ='';} else { telephone = this.model.telephone;}
-			// if (this.model.email =='undefined'){ email ='';} else { email = this.model.email;}
-			// if (this.model.web =='undefined'){ web ='';} else { web = this.model.web;}
-			// if (this.model.markerType =='undefined'){ icon ='images/map-marker-image.png';} else { icon = this.model.markerType;}      
-				
+
+
+			marker = new google.maps.Marker({
 				icon: 'images/map-marker-image.png',
 				position: new google.maps.LatLng(latitude, longitude),
 				map: map,
@@ -133,7 +204,9 @@ var MarkerView = Backbone.View.extend({
 				category: fakeDB.locations[i].category,
 				id: 'markerLayer',
 			});
-		
+			// console.log(mapVariables.userLat);
+
+			// console.log(marker);
 			var infowindow = new google.maps.InfoWindow();
 
 			//Close any open infoWindow if the map is clicked (don't want more than one open at a time)
@@ -152,11 +225,16 @@ var MarkerView = Backbone.View.extend({
 
 					////////MAkes the sidebar content from the marker info
 					document.getElementById('info-contents').innerHTML=infoWindowInfo;
-				}
-		})(marker, i));
-		locationList.push(marker.title);
-		};
+				};
+			})(marker, i));
+			locationList.push(marker.title);
+		}
 		console.log(locationList);
+
+
+
+
+
 		// for (i = 0; i <= locationList.length; i++) {
 		// 	console.log(locationList);
 		// 	console.log("location list" + locationList[i].title);
@@ -187,4 +265,7 @@ var MarkerView = Backbone.View.extend({
 console.log("Yeah I see you");
 	// },
 
-
+// for (i=0; i < fakeDB.locations.length; i++) 
+// 			var c = Math.sqrt( mapVariables.userLat * latitude + mapVariables.userLong * longitude );
+// 			// var distance = google.maps.geometry.spherical.computeDistanceBetween(from:mapVariables.LatLng, to:thisLatLng, radius?:number);
+// 				console.log(c);

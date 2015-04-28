@@ -3,7 +3,7 @@ var sidebars = Backbone.View.extend({
 	el: '#info-contents',
 	events: {
 		'click #save' : 'save',
-		'change #file': 's3_upload',
+		'change #files': 's3_upload',
 		'change #location-file-input': 'extractLocation',
 		'markerClick' : 'renderMarkerInfo'
 	},
@@ -55,7 +55,7 @@ var sidebars = Backbone.View.extend({
 				<option value='Architecture'>Architecture</option>\
 				<option value='Other'>Other</option>\
 				</select>\
-				<p>Select image<br>\
+				<p>Upload an image of the location!<br>\
 				</p>\
 				<!--\
 				HOPING TO MAKE THIS DECORATIVE\
@@ -67,10 +67,10 @@ var sidebars = Backbone.View.extend({
 				<span>Upload file to see location in console</span>\
 				<input id=\"location-file-input\" type=\"file\" accept=\"image/jpeg\" />\
 				<input type=\"file\" id=\"files\"/>\
-				<p id=\"status\">Please select a file</p>\
-				<div id=\"preview\"><img src=\"images/default.png\" style=\"width:300px;\" /></div>\
+				<p id=\"status\"></p>\
+				<div id=\"preview\"><img src=\"images/uploadPlaceholder.png\" style=\"width:300px;\" /></div>\
 				<br>\
-				<input type='submit' id='save' class='center' value='Submit'>\
+				<input type='submit' id='save' value='Submit'>\
 			</form>\
 		</div>";
 
