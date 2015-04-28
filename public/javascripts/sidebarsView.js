@@ -164,12 +164,29 @@ var sidebars = Backbone.View.extend({
 			EXIF.getData(photoFile, function() {
 	        var photoData = EXIF.getAllTags(this);
 	        if (photoData.GPSLatitudeRef != null || photoData.GPSLatitudeRef != undefined){
-		        var location = {
-		            latitude : photoData.GPSLatitude[2] + photoData.GPSLatitudeRef,
-		            longitude : photoData.GPSLongitude[2] + photoData.GPSLongitudeRef
+	        	var location = {},
+	        		degreesLat = photoData.GPSLatitude[0], 
+	        		minutesLat = photoData.GPSLatitude[1], 
+	        		secondsLat = photoData.GPSLatitude[2],
+	        		degreesLong = photoData.GPSLongitude[0], 
+	        		minutesLong = photoData.GPSLongitude[1], 
+	        		secondsLong = photoData.GPSLongitude[2],
 
-		        };
+	        		latitude = degreesLat + (minutesLat / 60) + (secondsLat / 36000),
+	        		longitude = degreesLong + (minutesLong / 60) + (secondsLong / 36000);
+	        		
+	        		if (photoData.GPSLatitudeRef === "S") {
+	        			latitude = ("-" + latitude);
+	        		} 
+	        		if (photoData.GPSLongitudeRef === "W") {
+	        			longitude = ("-" + longitude);
+	        		}
 
+	        		location.latitude = parseFloat(latitude);
+	        		location.longitude = parseFloat(longitude);
+
+		        //degrees is photoData.GPSLatitude[0], minutes is photoData.GPSLatitude[1], photoData.GPSLatitude[2]
+		        // Decimal Degrees = Degrees + minutes/60 + seconds/3600
 		        ////////s#_upload ////////////////
 		        var locURL = document.getElementById("locationURL");
 		        var status_elem = document.getElementById("status");
