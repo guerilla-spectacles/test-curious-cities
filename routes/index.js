@@ -2,7 +2,7 @@ var express = require('express'),
 	router = express.Router(),
 	db = require('orchestrate')(process.env.ORCHESTRATE_API_KEY),
   dbCollectionName = 'A-Most-Curious-Notion';
-  // bodyParser = require('body-parser');
+  bodyParser = require('body-parser');
 
 
 var router = express.Router();
@@ -43,33 +43,9 @@ router.get('/', function(req, res) {
 /** POST / create a new thing **/
 router.post('/api', function (req, res){
   console.log("here is the /api route");
-  db.post(dbCollectionName, {
-    "here": "it is"
-  })
-  // var location = req.param('#locationName'),
-  //     description =  req.param('#description'),
-  //     selected = req.param('#selected'),
-  //     locationURL = req.param('#locationURL'),
-  //     latitideP =  req.param('#latitideP'),
-  //     longitudeP = req.param('#longitudeP');
+  console.log(req.body);
 
-  // db.post(dbCollectionName, {
-  //     "location" : location,
-  //     "description" : description,
-  //     "selected" : selected,
-  //     "locationURL" : locationURL,
-  //     "latitideP" : latitideP,
-  //     "longitudeP" : longitudeP
-  //     })
-  // .then(function (result) {
-  //   var responseKey = result.headers.location.split("/")[3];
-  //   res.redirect('index');
-  // })
-  // .fail(function (err) {
-
-  // });
-  
-  
+  db.post(dbCollectionName, req.body)  
 });
 
 module.exports = router;
