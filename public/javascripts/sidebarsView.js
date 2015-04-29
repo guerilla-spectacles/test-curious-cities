@@ -23,7 +23,7 @@ var sidebars = Backbone.View.extend({
 		//makes the sidebar section
 		oddity = theCode;
 
-		var $name     
+		// var $name     
 
 		///////////Working on populating the "what's nearby" list with titles from the markers
 		// <div id='guide-button-div' class='info-dropdown center'><h2>Closest Curiosties</h2>
@@ -52,14 +52,12 @@ var sidebars = Backbone.View.extend({
 				<textarea id='description' name='location-description' maxlength='140' placeholder='Description'></textarea>\
 				<br>\
 				<select id='catType' name='oddity-type'>\
-				<option value='Unspecified'>Category</option>\
-				<option value='Art'>Art</option>\
-				<option value='Nature'>Nature</option>\
-				<option value='Architecture'>Architecture</option>\
-				<option value='Other'>Other</option>\
+					<option value='Unspecified'>Category</option>\
+					<option value='Art'>Art</option>\
+					<option value='Nature'>Nature</option>\
+					<option value='Architecture'>Architecture</option>\
+					<option value='Other'>Other</option>\
 				</select>\
-				<p>Upload an image of the location!<br>\
-				</p>\
 				<!--\
 				HOPING TO MAKE THIS DECORATIVE\
 				<div class='fileUpload' required>\
@@ -67,14 +65,12 @@ var sidebars = Backbone.View.extend({
     				<input placeholder='choose file' id='selectedFile' type='file' class='form-button'>\
 				</div>\
 				-->\
-				<span>Upload file to see location in console</span>\
 				<input id=\"location-file-input\" type=\"file\" accept=\"image/jpeg\" />\
 				<p id=\"status\"></p>\
-				<p id=\"locationURL\"></p>\
+				<p class='always-hidden' id=\"locationURL\"></p>\
 				<p class='always-hidden' id=\"latitideP\"></p>\
 				<p class='always-hidden' id=\"longitudeP\"></p>\
 				<div id=\"preview\"><img src=\"images/uploadPlaceholder.png\" style=\"width:300px;\" /></div>\
-				<br>\
 				<input type='submit' id='save' value='Submit' METHOD=POST action='/api'>\
 			</form>\
 		</div>";
@@ -114,7 +110,15 @@ var sidebars = Backbone.View.extend({
 		event.preventDefault();
 		var $locationName = $(this.el).find('#locationName').val();
 		var $locationDesc = $(this.el).find('#description').val();
-		var $categoryType = $(this.el).find("#selected").val();
+		// var $categoryType = $(this.el).find("#catType");
+		var selectedCategory;
+		function displayVals() {
+			selectedCategory = $( "#catType" ).val();
+		}
+		$( "select" ).change( displayVals );
+		displayVals();
+  		// var $selectedCategory = $categoryType.options[$categoryType.selectedIndex].value;
+// var strUser = e.options[e.selectedIndex].text;
 		var $locationURL = $(this.el).find("#locationURL").html();
 		var $locationLatitude = $(this.el).find("#latitideP").html();
 		var $locationLongitude = $(this.el).find("#longitudeP").html();
@@ -122,19 +126,12 @@ var sidebars = Backbone.View.extend({
 				img: ($locationURL),
 				title: ($locationName),
 				description: ($locationDesc ),
-				category: ($categoryType),
+				category: (selectedCategory),
 				latitude: ($locationLatitude),
 				longitude: ($locationLongitude)
 			}
 		//event.preventDefault();
-		console.log('yep, got a click');
-		console.log($locationName);
-		console.log($locationDesc);
-		console.log($categoryType);
-		console.log($locationURL);
-		console.log("test photo long." +$locationLongitude);
-		console.log("test photo lat" + $locationLatitude);
-
+		console.log(selectedCategory);
 
 		toMap = function() {
 

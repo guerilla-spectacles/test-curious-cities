@@ -8,7 +8,8 @@ body {
   background-color: #29C2B0;
   font-family: 'Open Sans', sans-serif;
   font-size: 13px;
-  margin: 0; }
+  margin: 0;
+  bottom: 0; }
 
 *, *:before, *:after {
   -webkit-box-sizing: border-box;
@@ -20,6 +21,7 @@ h1 {
   color: white; }
 
 h2 {
+  margin-top: 0;
   color: #005A6C; }
 
 h3 {
@@ -56,13 +58,19 @@ header {
   display: inline-block; }
 
 #info-contents {
+  height: 90vh;
+  position: relative;
   width: 100%;
+  box-sizing: border-box;
   display: inline;
   height: 50vh;
-  right: 0; }
+  right: 0;
+  top: 0; }
   #info-contents .info-dropdown {
     overflow: scroll;
-    padding: 20px 40px;
+    height: 90vh;
+    height: 100%;
+    padding: 10% 10%;
     width: 100%;
     text-align: center;
     background-color: white; }
@@ -121,16 +129,16 @@ input[type="email"], input[type="number"], input[type="password"], input[type="s
   background-color: #B5F8FF;
   text-align: left;
   width: 100%;
-  padding: 10px; }
+  padding: 10px;
+  margin: 10px auto;
+  font-size: 15px; }
 
 form p {
   margin: 0;
   line-height: 1.5em; }
 form input[type="text"] {
   border: none;
-  height: 2.5em;
   border-radius: 5px;
-  margin: 15px auto;
   outline: none;
   border: 0; }
 form input[type="text"]:focus {
@@ -142,6 +150,7 @@ form input[type="file"] {
 form textarea {
   border: none;
   resize: none;
+  font-size: 15px;
   background-color: #B5F8FF; }
 form textarea:focus {
   background-color: #75D1C6;
@@ -153,14 +162,14 @@ form #description {
   height: 6em;
   line-height: 1.5em;
   vertical-align: top;
-  border-radius: 5px;
-  margin: 15px auto; }
+  border-radius: 5px; }
 form select {
   border: none;
   margin: 15px auto;
   background-color: #B5F8FF;
   padding: 10px;
-  width: 100%; }
+  width: 100%;
+  margin: 5px auto; }
 form input[type="submit"] {
   background-color: #00C7DE;
   color: white;
@@ -199,9 +208,6 @@ form input[type="file"] {
   html {
     font-size: 16px; }
 
-  .info-dropdown {
-    height: 90vh; }
-
   #google-map {
     width: 65%;
     float: left; }
@@ -210,7 +216,8 @@ form input[type="file"] {
     width: 35%;
     display: inline;
     float: right;
-    height: 90vh; }
+    height: 90vh;
+    overflow: scroll; }
 
   form {
     line-height: 3em; } }
