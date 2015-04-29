@@ -132,8 +132,8 @@ var sidebars = Backbone.View.extend({
 		console.log($locationDesc);
 		console.log($categoryType);
 		console.log($locationURL);
-		console.log($locationLongitude);
-		console.log($locationLatitude);
+		console.log("test photo long." +$locationLongitude);
+		console.log("test photo lat" + $locationLatitude);
 
 
 		toMap = function() {
@@ -217,6 +217,7 @@ var sidebars = Backbone.View.extend({
 	        		}
 
 	        		location.latitude = parseFloat(latitude);
+
 	        		location.longitude = parseFloat(longitude);
 
 		        //degrees is photoData.GPSLatitude[0], minutes is photoData.GPSLatitude[1], photoData.GPSLatitude[2]
@@ -224,7 +225,9 @@ var sidebars = Backbone.View.extend({
 		        ////////s#_upload ////////////////
 		        var locURL = document.getElementById("locationURL");
 		        var locLatitude = document.getElementById("latitideP");
+		        console.log(locLatitude);
 		        var locLongitude = document.getElementById("longitudeP");
+		        console.log(locLongitude);
 		        var status_elem = document.getElementById("status");
 			    // var url_elem = document.getElementById("picture_url");
 			    var preview_elem = document.getElementById("preview");

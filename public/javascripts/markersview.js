@@ -6,8 +6,8 @@ fakeDB.locations = [
 		description: 'This is a weird and ugly mural of some sort of hipster meta-angst.  #ugly',
 		curiousType: 'Art',
 		img: 'images/jollyRog.jpg',
-		latitude: 45.5136190,
-		longitude: -122.6590430,
+		latitude: 45.51361,
+		longitude: -122.65904,
 		category: 'Art'
 	},
 	{
@@ -112,7 +112,6 @@ var mapLocs = new MapLocs();
 // 		// console.log('allMarkersView hello')
 // 	}
 // });
-
 
 
 //////////////////  Makes view for each individual marker //////////////////
