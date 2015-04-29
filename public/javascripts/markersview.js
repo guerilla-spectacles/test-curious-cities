@@ -7,6 +7,7 @@ fakeDB.locations = [
 		curiousType: 'Art',
 		img: 'images/jollyRog.jpg',
 		latitude: 45.51361,
+		sidebarItem: "Helsinki",
 		longitude: -122.65904,
 		category: 'Art'
 	},
@@ -17,6 +18,7 @@ fakeDB.locations = [
 		img: 'images/pdx.jpg',
 		latitude: 45.517555,
 		longitude: -122.63119,
+		  sidebarItem: "Helsinkiadfadf",
 		category: 'Art'
 	},
 	{
@@ -26,6 +28,7 @@ fakeDB.locations = [
 		img: 'images/fontina.png',
 		latitude: 45.517255,
 		longitude: -122.621819,
+		  sidebarItem: "asflkjasHelsinki",
 		category: 'Art'
 	},
 	{
@@ -34,6 +37,7 @@ fakeDB.locations = [
 		curiousType: 'Stuff',
 		img: 'images/blazers.jpg',
 		latitude: 45.51555,
+		  sidebarItem: "Helsfasd;lfkasd;inki",
 		longitude: -122.6419,
 		category: 'Art'
 	},
@@ -43,6 +47,7 @@ fakeDB.locations = [
 		curiousType: 'Stuff',
 		img: 'images/blazers.jpg',
 		latitude: 45.49555,
+		  sidebarItem: "AAAAAHelsinki",
 		longitude: -122.6419,
 		category: 'Art'
 	},
@@ -53,10 +58,12 @@ fakeDB.locations = [
 		img: 'images/blazers.jpg',
 		latitude: 45.59555,
 		longitude: -122.7419,
+		  sidebarItem: "sfkajds;flkajdsHelsinki",
 		category: 'Art'
 	}];
 
-var locationList = [];	
+var locationList = [];
+
 // var closestList = [];
 
 
@@ -145,7 +152,10 @@ var MarkerView = Backbone.View.extend({
         // 	userLat: null,
         // 	LatLng: null
         // }
-
+			var myclick = function() {
+				console.log('clicked!')
+				// map.getBounds().contains(i.getPosition())
+			};
 
 		// for (i=0; i < fakeDB.locations.length; i++) {
 			var desc = this.model.get('description');
@@ -168,6 +178,10 @@ var MarkerView = Backbone.View.extend({
 				category: category,
 				id: 'markerLayer',
 			});
+			marker.mycategory = category;              
+        	marker.myname = name;
+        	// locationList.push(marker);
+			// createMarkerButton(marker);
 			// console.log(mapVariables.userLat);
 
 			// console.log(marker);
@@ -178,20 +192,113 @@ var MarkerView = Backbone.View.extend({
 				infowindow.close();
 			});
 
+			/////////ORIGINAL NOT MESSED UP
 			google.maps.event.addListener(marker, 'click', (function(marker, i) {
 				return function() {
 
-					var infoWindowInfo = "<div id='guide-button-div' class='info-dropdown center'><h2>Closest Curiosties</h2><div class='curiousProfile'><h3>" + title + "</h3><img class='curious-img' src=" + img + "><p class='curious-description'>" + desc + "</p><p class='curious-type'>Category:<br>" + category + '</p></div>';
 
+
+					var infoWindowInfo = "<div id='guide-button-div' class='info-dropdown center'><div class='curiousProfile'><h3>" + title + "</h3><img class='curious-img' src=" + img + "><p class='curious-description'>" + desc + "</p><p class='curious-type'>Category:<br>" + category + '</p></div>';
+					infowindow.setContent(infoWindowInfo);
+
+					// if(this.sidebarButton)this.sidebarButton.button.focus();
 					//////////////Info Window if we want it ///////////////
-					// infowindow.setContent("<div id='guide-button-div' class='info-dropdown center'><h2>Closest Curiosties</h2><div class='curiousProfile'><h3>" + fakeDB.locations[i].title + "</h3><img class='curious-img' src=" + fakeDB.locations[i].img + "><p class='curious-description'>" + fakeDB.locations[i].description + "</p><p class='curious-type'>Category:" + fakeDB.locations[i].category + '</p></div>');
-					// infowindow.open(map, marker);
+					// infowindow.setContent("<div class='curiousProfile'><h3>" + title + "</h3><img class='curious-img' src=" + img + "><p class='curious-description'>" + desc + "</p><p class='curious-type'>Category:" + category + '</p></div>');
+					// infowindow.open(app.map, marker);
 
-					////////MAkes the sidebar content from the marker info
-					document.getElementById('info-contents').innerHTML=infoWindowInfo;
+					//////MAkes the sidebar content from the marker info
+					document.getElementById('selected-marker').innerHTML=infoWindowInfo;
 				};
+
+
+
+				var idleIcon = pushPin.getIcon();
+  				if(options.sidebarItem){
+				    pushPin.sidebarButton = new SidebarItem(pushPin, options);
+				    pushPin.sidebarButton.addIn("sidebar");
+				}
+
+
 			})(marker));
-			locationList.push(marker.title);
+			locationList.push(marker);
+				var $selectedDiv = "<div id='guide-button-div' class='info-dropdown center'><h2>Closest Curiosties</h2><ul id='loc-list'></ul></div>";
+				document.getElementById('info-contents').innerHTML=$selectedDiv;
+
+				// var selectedDiv = document.getElementById("loc-list");
+				// console.log(selectedDiv);  			
+
+
+  	// 		function createMarkerButton(marker) {
+			// 	//Creates a sidebar button
+			// 	// var theThing = "<div id='guide-button-div' class='info-dropdown center'><ul id=loc-list></ul></div>";
+			// 	// thing.appendChild()
+			// 	// console.log(theThing);
+			// 	// var $selectedDiv = $("#guide-button-div");
+			// 	// var $selectedDiv = "<div id='guide-button-div' class='info-dropdown center'><h2>Closest Curiosties</h2><ul id='loc-list'></ul></div>";
+			// 	// document.getElementById('info-contents').innerHTML=$selectedDiv;
+			// 	// console.log($selectedDiv);
+				
+			// 	var ul = $("#loc-list");
+			// 	console.log(ul);
+			// 	var li = document.createElement("li");
+			// 	// var title = marker.getTitle();
+			// 	li.innerHTML = title;
+			// 	console.log(li);
+			// 	ul.append(li);
+
+			// 	//Trigger a click event to marker when the button is clicked.
+			// 	// google.maps.event.addDomListener(li, "click", function(){
+			// 	// 	google.maps.event.trigger(marker, "click");
+			// 	// 	console.log("hi");
+			// 	// });
+			// };
+
+
+
+			      // == rebuilds the sidebar to match the markers currently displayed ==
+	        function makeSidebar() {
+	        	console.log(locationList);
+		        var html = "";
+		        var node = document.getElementById("guide-button-div");
+		        for (var i=0; i<locationList.length; i++) { 
+		        console.log(locationList[i].mycategory); 
+	            	html += '<a href="javascript:myclick(' + i + ')">' + locationList[i].title + '<\/a><br>';
+	    	    }
+	        	$("#guide-button-div").append(html);
+	      	}
+			makeSidebar();
+
+			// function SidebarItem(marker, opts){
+			// 	var tag = opts.sidebarItemType || "button";
+			// 	var row = document.createElement(tag);
+			// 	row.innerHTML = opts.sidebarItem;
+			// 	row.className = opts.sidebarItemClassName || "sidebar_item";  
+			// 	row.style.display = "block";
+			// 	row.style.width = opts.sidebarItemWidth || "120px";
+			// 	row.onclick = function(){
+			// 		google.maps.event.trigger(marker, 'click');
+			// 	}
+			// 	row.onmouseover = function(){
+			// 		google.maps.event.trigger(marker, 'mouseover');
+			// 	}
+			// 	row.onmouseout = function(){
+			// 		google.maps.event.trigger(marker, 'mouseout');
+			// 	}
+			// 		this.button = row;
+			// }
+			// 	// adds a sidebar item to a <div>
+			// SidebarItem.prototype.addIn = function(theDiv){
+			// 	theDiv.empty();
+			// 	this.div.appendChild(this.button);
+			// 	contole.log('tried');
+			// }
+			// 	// deletes a sidebar item
+			// 	SidebarItem.prototype.remove = function(){
+			// 	if(!this.div) return false;
+			// 	this.div.removeChild(this.button);
+			// 	return true;
+			// }
+
 		// }
 		// console.log(locationList);
 

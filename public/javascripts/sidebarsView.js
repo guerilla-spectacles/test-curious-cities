@@ -18,10 +18,44 @@ var sidebars = Backbone.View.extend({
 		var template = "<div id='guide-button-div' class='info-dropdown center'><h2>Closest Curiosties</h2><div class='curiousProfile'><h3>{{title}}</h3><img class='curious-img' src='{{img}}'><p class='curious-description'>{{description}}</p><p class='curious-type'>Category:{{curiousType}}</p></div>"
 		
 		//Converts marker info into template material
-		var theCode = Mustache.to_html(template, fakeDB.locations[1]);
+		// var theCode = Mustache.to_html(template, fakeDB.locations[1]);
+
+		var theCode = "<div id='guide-button-div' class='info-dropdown center'><h2>Closest Curiosties</h2><ul id='loc-list'></ul><div id='selected-marker'></div></div>"
 
 		//makes the sidebar section
 		oddity = theCode;
+
+		// var theCode = function (marker, opts){
+		// 	console.log('test"');
+		// 		var tag = opts.sidebarItemType || "button";
+		// 		var row = document.createElement(tag);
+		// 		row.innerHTML = opts.sidebarItem;
+		// 		row.className = opts.sidebarItemClassName || "sidebar_item";  
+		// 		row.style.display = "block";
+		// 		row.style.width = opts.sidebarItemWidth || "120px";
+		// 		row.onclick = function(){
+		// 			google.maps.event.trigger(marker, 'click');
+		// 		}
+		// 		row.onmouseover = function(){
+		// 			google.maps.event.trigger(marker, 'mouseover');
+		// 		}
+		// 		row.onmouseout = function(){
+		// 			google.maps.event.trigger(marker, 'mouseout');
+		// 		}
+		// 			this.button = row;
+		// 	}
+		// 		// adds a sidebar item to a <div>
+		// 	this.prototype.addIn = function(theDiv){
+		// 		theDiv.empty();
+		// 		this.div.appendChild(this.button);
+		// 		contole.log('tried');
+		// 	}
+		// 		// deletes a sidebar item
+		// 		this.prototype.remove = function(){
+		// 		if(!this.div) return false;
+		// 		this.div.removeChild(this.button);
+		// 		return true;
+		// 	}
 
 		// var $name     
 

@@ -110,6 +110,8 @@ var ScoutMap = Backbone.View.extend({
 		app.map.setCenter(options.position);
       	//end Geolocation	
 		};
+
+
 		
 		// google.maps.event.addListener(marker, 'click', function() {
 		// 	console.log('clicked on map!')
@@ -117,7 +119,6 @@ var ScoutMap = Backbone.View.extend({
 		//////////////////  Declares the actual map  //////////////////
 		app.map = new google.maps.Map(document.getElementById("google-map"),mapProp);
   		
-
 	},	
 
 });

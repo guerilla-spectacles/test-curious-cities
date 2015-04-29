@@ -22,6 +22,7 @@ var Buttons = Backbone.View.extend({
 			Add = new sidebars('add')
 		} else if (targetID == 'guide-button'){
 			Guide = new sidebars('guide')
+			
 		} else if (targetID == 'about-button'){
 			Info = new sidebars('info')
 		};	
