@@ -60,6 +60,16 @@ var locationList = [];
 var closestList = [];
 
 
+//////////////////  Makes Marker model //////////////////
+var Marker = Backbone.Model.extend({
+	initialize: function() {
+		var markyMark = new MarkerView({model: this});
+		console.log('hi from marker init');
+	}
+	//initializie: make view, which renders the view
+
+});
+
 
 // var allMarkersView = new 
 
@@ -217,15 +227,7 @@ var MarkerView = Backbone.View.extend({
 		});
 		flag.setMap(self.map);
 		*/
-//////////////////  Makes Marker model //////////////////
-var Marker = Backbone.Model.extend({
-	initialize: function() {
-		var markyMark = new MarkerView({model: this});
-		console.log('hi from marker init');
-	}
-	//initializie: make view, which renders the view
 
-});
 
 
 console.log("Yeah I see you");
