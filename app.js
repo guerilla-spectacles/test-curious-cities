@@ -4,23 +4,28 @@ var express = require('express'),
     aws = require('aws-sdk'),
     uuid = require('node-uuid'),
     ExifImage = require('exif').ExifImage;
-    db = require('orchestrate')(process.env.ORCHESTRATE_API_KEY);
+    db = require('orchestrate')(process.env.ORCHESTRATE_API_KEY),
+    dbCollectionName = 'Most-Curious-Data';
 
 var app = express();
+
+var routes = require('./routes/index');
 
 app.set('views', path.join(__dirname, 'public'));
 app.set('title', 'Curious Cities ');
 app.engine('html', require('ejs').renderFile);
 app.set('port', process.env.PORT || 3000);
+app.use('/api', routes);
+app.use('/c/:id', routes);
 app.use(express.static(path.join(__dirname, 'public')));
 
 var AWS_ACCESS_KEY_ID = process.env.AWS_ACCESS_KEY_ID;
 var AWS_SECRET_ACCESS_KEY = process.env.AWS_SECRET_ACCESS_KEY;
 var S3_BUCKET_NAME = process.env.S3_BUCKET_NAME
 
-app.get('/', function(req, res){
-    res.render('index.html');
-});
+// router.get('/', function(req, res){
+//     res.render('index.html');
+// });
 
 app.get('/sign_s3', function(req, res){
     aws.config.update({accessKeyId: AWS_ACCESS_KEY_ID , secretAccessKey: AWS_SECRET_ACCESS_KEY });
@@ -48,21 +53,21 @@ app.get('/sign_s3', function(req, res){
     });
 });
 
-    app.post('/submit_form', function(req, res){
-//    
-        db.post('curious-data', {
-            "url": req.param("picture_url"),
-            "name": req.param("name"),
-            "description": req.param("description"),
-            "category": req.param("oddity_type"),
-            "uploadTime": new Date()
-        })
-        .then(function (res) {
-            console.log(res.statusCode)
-        })
-        .fail(function(err) {
+//     app.post('/submit_form', function(req, res){
+// //    
+//         db.post('curious-data', {
+//             "url": req.param("picture_url"),
+//             "name": req.param("name"),
+//             "description": req.param("description"),
+//             "category": req.param("oddity_type"),
+//             "uploadTime": new Date()
+//         })
+//         .then(function (res) {
+//             console.log(res.statusCode)
+//         })
+//         .fail(function(err) {
 
-        });
-});
+//         });
+// });
 
 app.listen(app.get('port'));

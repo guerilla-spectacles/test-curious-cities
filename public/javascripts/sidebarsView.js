@@ -73,7 +73,7 @@ var sidebars = Backbone.View.extend({
 				<p id=\"locationURL\"></p>\
 				<div id=\"preview\"><img src=\"images/uploadPlaceholder.png\" style=\"width:300px;\" /></div>\
 				<br>\
-				<input type='submit' id='save' value='Submit'>\
+				<input type='submit' id='save' value='Submit' METHOD=POST action='/api'>\
 			</form>\
 		</div>";
 
