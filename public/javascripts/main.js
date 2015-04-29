@@ -7,6 +7,6 @@ var app = {}
 
 $( document ).ready(function() {
 	// //////////////////  Puts all objects from fake DB in the MapLocs collection //////////////////
-	mapLocs.add(fakeDB.locations);
+	mapLocs.fetch();
   // Handler for .ready() called.
 });

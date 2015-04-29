@@ -111,7 +111,7 @@ var sidebars = Backbone.View.extend({
 
 	//////////////////  Controls the sumbit/save button event //////////////////
 	save: function(event){
-		event.preventDefault();
+		// event.preventDefault();
 		var $locationName = $(this.el).find('#locationName').val();
 		var $locationDesc = $(this.el).find('#description').val();
 		var $categoryType = $(this.el).find("#selected").val();
