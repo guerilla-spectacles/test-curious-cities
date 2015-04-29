@@ -71,6 +71,8 @@ var sidebars = Backbone.View.extend({
 				<input id=\"location-file-input\" type=\"file\" accept=\"image/jpeg\" />\
 				<p id=\"status\"></p>\
 				<p id=\"locationURL\"></p>\
+				<p id=\"latitideP\"></p>\
+				<p id=\"longitudeP\"></p>\
 				<div id=\"preview\"><img src=\"images/uploadPlaceholder.png\" style=\"width:300px;\" /></div>\
 				<br>\
 				<input type='submit' id='save' value='Submit'>\
@@ -112,14 +114,46 @@ var sidebars = Backbone.View.extend({
 		event.preventDefault();
 		var $locationName = $(this.el).find('#locationName').val();
 		var $locationDesc = $(this.el).find('#description').val();
-		var $categoryType = $(":selected").val();
+		var $categoryType = $(this.el).find("#selected").val();
 		var $locationURL = $(this.el).find("#locationURL").html();
+		var $locationLatitude = $(this.el).find("#latitideP").html();
+		var $locationLongitude = $(this.el).find("#longitudeP").html();
+		var newMarker = {
+				img: ($locationURL),
+				title: ($locationName),
+				description: ($locationDesc ),
+				category: ($categoryType),
+				latitude: ($locationLatitude),
+				longitude: ($locationLongitude)
+			}
 		//event.preventDefault();
 		console.log('yep, got a click');
 		console.log($locationName);
 		console.log($locationDesc);
 		console.log($categoryType);
 		console.log($locationURL);
+		console.log("test photo long." +$locationLongitude);
+		console.log("test photo lat" + $locationLatitude);
+
+
+		toMap = function() {
+
+
+			///////FOR WHEN ORCHESTRATE IS SET UP!
+			// mapLocs.create(newMarker);
+
+			//////////Delete when orchestrate is set up
+			mapLocs.add(newMarker);
+
+			
+				// var newMarkerView = new MarkerView({model: newMarker});
+			// console.log('before markerView Render');
+		};
+		toMap();
+
+		toOrchestrate = function(){
+
+		};
 		//console.log($locationURL);
 		//var photoLoc = $('#photoInput').get(0).files[0];
 		//console.log(photoLoc);
@@ -183,12 +217,17 @@ var sidebars = Backbone.View.extend({
 	        		}
 
 	        		location.latitude = parseFloat(latitude);
+
 	        		location.longitude = parseFloat(longitude);
 
 		        //degrees is photoData.GPSLatitude[0], minutes is photoData.GPSLatitude[1], photoData.GPSLatitude[2]
 		        // Decimal Degrees = Degrees + minutes/60 + seconds/3600
 		        ////////s#_upload ////////////////
 		        var locURL = document.getElementById("locationURL");
+		        var locLatitude = document.getElementById("latitideP");
+		        console.log(locLatitude);
+		        var locLongitude = document.getElementById("longitudeP");
+		        console.log(locLongitude);
 		        var status_elem = document.getElementById("status");
 			    // var url_elem = document.getElementById("picture_url");
 			    var preview_elem = document.getElementById("preview");
@@ -208,6 +247,8 @@ var sidebars = Backbone.View.extend({
 			            var $statusID = $(this.el).find("#status");
 			            console.log($statusID);
 			            locationURL.innerHTML = public_url;
+			            locLatitude.innerHTML = location.latitude;
+			            locLongitude.innerHTML = location.longitude;
 			            console.log(public_url);
 			            console.log('here we go');
 			            console.log(publicURL);
