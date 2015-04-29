@@ -13,7 +13,6 @@ router.get('/', function(req, res) {
    db.newSearchBuilder()
     .collection(dbCollectionName)
     .limit(10)
-    .offset(offset)
     .query('*')
     .then(function (things){
       res.render('index');
