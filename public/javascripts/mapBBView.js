@@ -69,12 +69,12 @@ var ScoutMap = Backbone.View.extend({
 				console.log('grabbing location from nav');
 				var pos = new google.maps.LatLng(position.coords.latitude,
 	    		position.coords.longitude);		      		
-	      		map.setCenter(pos);
+	      		app.map.setCenter(pos);
 
 
 				//////////////////  You are here marker //////////////////
       			var userLocation = new google.maps.Marker({
-		      		map: map,
+		      		map: app.map,
 		      		position: pos,
 		      		icon: 'images/you-are-here.png',
 		      		id: 'usersLocation',
@@ -103,11 +103,11 @@ var ScoutMap = Backbone.View.extend({
 			    var content = 'Error: Your browser doesn\'t support geolocation.';
 			}
 		var options = {
-			map: map,
+			map: app.map,
 			position: new google.maps.LatLng(45.517534,-122.648507),
 			content: content
 		};
-		map.setCenter(options.position);
+		app.map.setCenter(options.position);
       	//end Geolocation	
 		};
 		
@@ -115,7 +115,7 @@ var ScoutMap = Backbone.View.extend({
 		// 	console.log('clicked on map!')
 		// };
 		//////////////////  Declares the actual map  //////////////////
-  		self.map = new google.maps.Map(document.getElementById("google-map"),mapProp);
+		app.map = new google.maps.Map(document.getElementById("google-map"),mapProp);
   		
 
 	},	

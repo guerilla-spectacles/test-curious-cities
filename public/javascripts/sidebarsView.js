@@ -114,7 +114,7 @@ var sidebars = Backbone.View.extend({
 		event.preventDefault();
 		var $locationName = $(this.el).find('#locationName').val();
 		var $locationDesc = $(this.el).find('#description').val();
-		var $categoryType = $(":selected").val();
+		var $categoryType = $(this.el).find("#selected").val();
 		var $locationURL = $(this.el).find("#locationURL").html();
 		var $locationLatitude = $(this.el).find("#latitideP").html();
 		var $locationLongitude = $(this.el).find("#longitudeP").html();
@@ -143,7 +143,7 @@ var sidebars = Backbone.View.extend({
 			// mapLocs.create(newMarker);
 
 			//////////Delete when orchestrate is set up
-			collection.add(newMarker);
+			mapLocs.add(newMarker);
 
 			
 				// var newMarkerView = new MarkerView({model: newMarker});

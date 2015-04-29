@@ -57,7 +57,7 @@ fakeDB.locations = [
 	}];
 
 var locationList = [];	
-var closestList = [];
+// var closestList = [];
 
 
 //////////////////  Makes Marker model //////////////////
@@ -82,14 +82,14 @@ var MapLocs = Backbone.Collection.extend({
 var mapLocs = new MapLocs();
 
 
-//////////////////  Puts all objects from fake DB in the MapLocs collection //////////////////
-mapLocs.add(fakeDB.locations);
+// //////////////////  Puts all objects from fake DB in the MapLocs collection //////////////////
+// mapLocs.add(fakeDB.locations);
 
 
 		/////////////Closest Marker Attempt
 		        // find the closest location to the user's location
-        var closest = 0;
-        var mindist = 99999;
+        // var closest = 0;
+        // var mindist = 99999;
 
 
 ///////////Delete this section? ///////////
@@ -123,9 +123,9 @@ var MarkerView = Backbone.View.extend({
 	className : 'google-map-marker',
 
 	
-	initialize: function(opts){
+	initialize: function(){
 		var self = this;
-		self.map = opts.map;
+		self.map = app.map;
 		// console.log(self);
 		self.render();
 		// console.log('here is map after installing from opts');
@@ -159,10 +159,10 @@ var MarkerView = Backbone.View.extend({
 
 
 
-			marker = new google.maps.Marker({
+			var marker = new google.maps.Marker({
 				icon: 'images/map-marker-image.png',
 				position: new google.maps.LatLng(latitude, longitude),
-				map: this.map,
+				map: app.map,
 				img: img,
 				title: title,
 				description: desc,
@@ -171,18 +171,18 @@ var MarkerView = Backbone.View.extend({
 			});
 			// console.log(mapVariables.userLat);
 
-			// console.log(marker);
+			console.log(marker);
 			var infowindow = new google.maps.InfoWindow();
 
 			//Close any open infoWindow if the map is clicked (don't want more than one open at a time)
-			google.maps.event.addListener(map, 'click', function() {
+			google.maps.event.addListener(app.map, 'click', function() {
 				infowindow.close();
 			});
 
 			google.maps.event.addListener(marker, 'click', (function(marker, i) {
 				return function() {
 
-					var infoWindowInfo = "<div id='guide-button-div' class='info-dropdown center'><h2>Closest Curiosties</h2><div class='curiousProfile'><h3>" + title + "</h3><img class='curious-img' src=" + img + "><p class='curious-description'>" + description + "</p><p class='curious-type'>Category:<br>" + category + '</p></div>';
+					var infoWindowInfo = "<div id='guide-button-div' class='info-dropdown center'><h2>Closest Curiosties</h2><div class='curiousProfile'><h3>" + title + "</h3><img class='curious-img' src=" + img + "><p class='curious-description'>" + desc + "</p><p class='curious-type'>Category:<br>" + category + '</p></div>';
 
 					//////////////Info Window if we want it ///////////////
 					// infowindow.setContent("<div id='guide-button-div' class='info-dropdown center'><h2>Closest Curiosties</h2><div class='curiousProfile'><h3>" + fakeDB.locations[i].title + "</h3><img class='curious-img' src=" + fakeDB.locations[i].img + "><p class='curious-description'>" + fakeDB.locations[i].description + "</p><p class='curious-type'>Category:" + fakeDB.locations[i].category + '</p></div>');
