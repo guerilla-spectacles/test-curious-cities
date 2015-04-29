@@ -7,37 +7,37 @@
 /////////// MIXINS  ////////////////
 
 @mixin vertical-align {
-  position: relative;
-  top: 50%;
-  -webkit-transform: translateY(-50%);
-  -ms-transform: translateY(-50%);
-  transform: translateY(-50%);
+     position: relative;
+     top: 50%;
+     -webkit-transform: translateY(-50%);
+     -ms-transform: translateY(-50%);
+     transform: translateY(-50%);
 }
 
 @mixin image-sizer {
-    width: auto;
-    max-width: 100%;
-    height: auto;
-    max-height: 300px;
+     width: auto;
+     max-width: 100%;
+     height: auto;
+     max-height: 300px;
 }
 
 @mixin border-radius {
-  border-radius: 5px;
+     border-radius: 5px;
 }
 
 @mixin standard-padding {
-  padding: 20px;
+     padding: 20px;
 }
 // @include standard-padding;
 
 @mixin standard-margin {
-  margin: 15px auto;
+     margin: 15px auto;
 }
 // @include standard-margin;
 
 @mixin active-style {
-  outline: none;
-  border: 0;
+     outline: none;
+     border: 0;
 }
 
 /////////// VARIABLES ////////////////
@@ -60,53 +60,54 @@ $dark-green: #29C2B0;
 body {
 	background-color: $dark-green;
 	font-family: 'Open Sans', sans-serif;
-  font-size: 13px;
-  margin: 0;
+     font-size: 13px;
+     margin: 0;
+     bottom: 0;
 }
 
 *, *:before, *:after {
-  @include box-sizing(border-box);
+     @include box-sizing(border-box);
 }
 
 h1 {
-  margin: 0;
+     margin: 0;
 	color: white;
 }
 
 h2 {
-  color: $dark-blue;
+     margin-top: 0;
+     color: $dark-blue;
 }
 
 h3 {
-  color: $dark-orange;
+     color: $dark-orange;
 }
 
 p {
-  margin-bottom: .5em;
+     margin-bottom: .5em;
 }
 
 .center {
-    margin-left: auto;
-    margin-right: auto;
+     margin-left: auto;
+     margin-right: auto;
 }
 
 .always-hidden {
-  display: none;
+     display: none;
 }
 
 button:focus {
-  @include active-style;
+     @include active-style;
 }
 
 header {
-  // padding: auto 20px;
-  height: 10vh;
-  @include padding(0 2%);
-  background-color: $dark-green;
-  div {
-
-    @include vertical-align;
-  }
+     // padding: auto 20px;
+     height: 10vh;
+     @include padding(0 2%);
+     background-color: $dark-green;
+     div {
+          @include vertical-align;
+     }
 }
 
 // .small-map {
@@ -123,58 +124,65 @@ header {
 
 #info-contents {
   // min-width: 300px;
-    width: 100%;
-    display: inline;
-    height: 50vh;
-    right: 0;
+      // overflow: scroll;
+     height: 90vh;
+     position: relative;
+     width: 100%;
+     box-sizing: border-box;
+     display: inline;
+     height: 50vh;
+     right: 0;
+     top: 0;
     .info-dropdown {
-    overflow: scroll;
-    padding: 20px 40px;
-    width: 100%;
-    // margin: auto;
-    text-align: center;
-    background-color: white;
-}
+          overflow: scroll;
+          height: 90vh;
+          height: 100%;
+          padding: 10% 10%;
+          width: 100%;
+     // margin: auto;
+     text-align: center;
+     background-color: white;
+     }
 }
 
 #logo {
-  width: 50%;
-  float: left;
+     width: 50%;
+     float: left;
 }
 
 #buttons {
-    margin: 10px 10px auto 0;
-    text-align: right;
-    width: 45%;
-    float: right;
-    display: inline-block;
+     margin: 10px 10px auto 0;
+     text-align: right;
+     width: 45%;
+     float: right;
+     display: inline-block;
 }
 
 .button-container {
-  display: inline-block;
-  margin: auto 10px;
+     display: inline-block;
+     margin: auto 10px;
 }
 
 button {
-  border: 0;
-  background-color: transparent;
-  color: white;
-  margin: auto;
-  padding: 0;
-  font-size: 15px;
+     border: 0;
+     background-color: transparent;
+     color: white;
+     margin: auto;
+     padding: 0;
+     font-size: 15px;
 }
 
 button:hover {
-  color: $dark-blue;
+     color: $dark-blue;
 }
 
 .hidden {
-    display: none;
+     display: none;
 }
 
 .infoWindow {
-    background-color:red;
-    text-align: center;
+     background-color:red;
+     text-align: center;
 }
 
 
@@ -182,95 +190,97 @@ button:hover {
 //////////////Curiousity Pane /////////
 
 #guide-button-div {
-  .curious-img {
-    @include image-sizer;
-  }
-  .curious-description {
-    color: $dark-blue;
-  }
-  .curious-type {
-    color: $dark-green;
-    font-weight: 300;
-  }
+     .curious-img {
+          @include image-sizer;
+     }
+     .curious-description {
+          color: $dark-blue;
+     }
+     .curious-type {
+          color: $dark-green;
+          font-weight: 300;
+     }
 }
 
 #preview {
-  img {
-    @include image-sizer;
-  }
+     img {
+          @include image-sizer;
+     }
 }
 
 //////ADD FORM STYLES
 #{$all-text-inputs} {
-  background-color: $light-blue;
-  text-align: left;
-  width: 100%;
-  padding: 10px;
+     background-color: $light-blue;
+     text-align: left;
+     width: 100%;
+     padding: 10px;
+     margin: 10px auto;
+     font-size: 15px;
 }
 
 
 form {
-  p {
-    margin: 0;
-    line-height: 1.5em;
-  }
-  input[type="text"] {
-    border: none;
-    height: 2.5em;
-    @include border-radius;
-    @include standard-margin;
-    @include active-style;
-  };
-  input[type="text"]:focus {
-    background-color: $light-green;
+     p {
+          margin: 0;
+          line-height: 1.5em;
+     }
+     input[type="text"] {
+          border: none;
+          @include border-radius;
+          @include active-style;
+     }
+     input[type="text"]:focus {
+          background-color: $light-green;
+     }
+     input[type="file"] {
+          text-align: center;
+     button {
+          background-color: blue;
+     }
+}
 
-  }
-  input[type="file"] {
-    text-align: center;
-    button {
-      background-color: blue;
-    }
-  };
-  .form-button {
+textarea {
+     border: none;
+     resize: none;
+     font-size: 15px;
+     background-color: $light-blue;
+}
 
-  }
-  textarea {
-    border: none;
-    resize: none;
-    background-color: $light-blue;
-  }
-  textarea:focus {
-    background-color: $light-green;
-    @include active-style;
-  }
-  #description {
-    padding: 10px;
-    width: 100%;
-    height: 6em;
-    line-height: 1.5em;
-    vertical-align: top;
-    @include border-radius;
-    @include standard-margin;
-  }
-  select {
-    border: none;
-    @include standard-margin;
-    background-color: $light-blue;
-    padding: 10px;
-    width: 100%;
-  };
+textarea:focus {
+     background-color: $light-green;
+     @include active-style;
+}
 
-  input[type="submit"] {
-    background-color: $blue;
-    color: white;
-    border: none;
-    @include border-radius;
-    font-size: 16px;
-    padding: 10px;
-  };
-  input[type="file"] {
-    color: transparent;
-  }
+#description {
+     padding: 10px;
+     width: 100%;
+     height: 6em;
+     line-height: 1.5em;
+     vertical-align: top;
+     @include border-radius;
+     // @include standard-margin;
+}
+
+select {
+     border: none;
+     @include standard-margin;
+     background-color: $light-blue;
+     padding: 10px;
+     width: 100%;
+     margin: 5px auto;
+}
+
+input[type="submit"] {
+     background-color: $blue;
+     color: white;
+     border: none;
+     @include border-radius;
+     font-size: 16px;
+     padding: 10px;
+     }
+     input[type="file"] {
+          color: transparent;
+     }
 }
 
 /*img {
@@ -314,36 +324,36 @@ form {
 // }
 
 @media screen and (min-width: 600px){
-  html{
-    font-size: 16px;
-  }
-    .info-dropdown {
-    height: 90vh;
-  }
-  #google-map {
-    width: 65%;
-    float: left;
-  }
-  #info-contents {
-    width: 35%;
-    display: inline;
-    float: right;
-    height: 90vh;
-  }
-    form {
-    line-height: 3em;
-  }
-
+     html{
+          font-size: 16px;
+     }
+          //   #info-contents {
+          //   height: 90vh;
+     // }
+     #google-map {
+          width: 65%;
+          float: left;
+     }
+     #info-contents {
+          width: 35%;
+          display: inline;
+          float: right;
+          height: 90vh;
+          overflow: scroll;
+     }
+     form {
+          line-height: 3em;
+     }
 }
 
 @media screen and (min-width: 1200px){
-  html{
-    // font-size: 16px;
-  }
-  #info-contents {
-    width: 25%;
-  }
-  #google-map {
-    width: 75%;
-  }
+     html{
+     // font-size: 16px;
+     }
+     #info-contents {
+          width: 25%;
+     }
+     #google-map {
+          width: 75%;
+     }
 }
