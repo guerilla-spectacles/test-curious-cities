@@ -16,29 +16,11 @@ router.get('/', function(req, res) {
     .limit(10)
     .query('*')
     .then(function (things){
-      console.log("hello from the server after newSearchBuilder");
       res.render('index');
     });
 
 
 });
-
-
-
-// router.post('/c/:id', function(req, res) {
-//   var id = req.param("id")
-//   , post = {
-//     text: req.param("answer")
-//   }
-
-//   db.newEventBuilder()
-//     .from(dbCollectionName, id)
-//     .type('post')
-//     .data(post)
-//     .then(function (results){
-//       res.redirect("/c/" + id);
-//     });
-// });
 
 /** POST / create a new thing **/
 router.post('/api', function (req, res){
