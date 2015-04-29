@@ -170,7 +170,7 @@ var MarkerView = Backbone.View.extend({
 			});
 			// console.log(mapVariables.userLat);
 
-			console.log(marker);
+			// console.log(marker);
 			var infowindow = new google.maps.InfoWindow();
 
 			//Close any open infoWindow if the map is clicked (don't want more than one open at a time)
