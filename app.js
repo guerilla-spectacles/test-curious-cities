@@ -15,9 +15,11 @@ app.set('views', path.join(__dirname, 'public'));
 app.set('title', 'Curious Cities ');
 app.engine('html', require('ejs').renderFile);
 app.set('port', process.env.PORT || 3000);
+app.use(express.static(path.join(__dirname, 'public')));
+
+app.use('/', routes);
 app.use('/api', routes);
 app.use('/c/:id', routes);
-app.use(express.static(path.join(__dirname, 'public')));
 
 var AWS_ACCESS_KEY_ID = process.env.AWS_ACCESS_KEY_ID;
 var AWS_SECRET_ACCESS_KEY = process.env.AWS_SECRET_ACCESS_KEY;
