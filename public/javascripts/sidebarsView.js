@@ -75,7 +75,7 @@ var sidebars = Backbone.View.extend({
 				<p class='always-hidden' id=\"longitudeP\"></p>\
 				<div id=\"preview\"><img src=\"images/uploadPlaceholder.png\" style=\"width:300px;\" /></div>\
 				<br>\
-				<input type='submit' id='save' value='Submit' METHOD=POST action='/api'>\
+				<input type='submit' id='save' value='Submit'>\
 			</form>\
 		</div>";
 
@@ -140,10 +140,10 @@ var sidebars = Backbone.View.extend({
 
 
 			///////FOR WHEN ORCHESTRATE IS SET UP!
-			// mapLocs.create(newMarker);
+			mapLocs.create(newMarker);
 
 			//////////Delete when orchestrate is set up
-			mapLocs.add(newMarker);
+			// mapLocs.add(newMarker);
 
 			
 				// var newMarkerView = new MarkerView({model: newMarker});

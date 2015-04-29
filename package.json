@@ -12,6 +12,7 @@
     "node-uuid": "1.4.3",
     "exif": "0.4.x",
     "moment": "^2.7.0",
-    "orchestrate": "^0.2.0"
+    "orchestrate": "^0.2.0",
+    "body-parser" : "1.12.x"
   }
 }
