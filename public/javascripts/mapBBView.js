@@ -2,13 +2,14 @@ var ScoutMap = Backbone.View.extend({
 	el: '#google-map',
 
 	initialize: function(opts){
+
 		var self = this;
 		self.render();
 		// console.log('here is map, and then self.map');
 		// console.log(map);
 		// console.log(self.map);
-		var locationFlag = new MarkerView({map: map, collection: mapLocs});
-		
+		//var locationFlag = new MarkerView({map: map, collection: mapLocs});
+		mapLocs.fetch();
 		var curiousButtons = new Buttons();
 		var StartBar = new sidebars('add');
 		
@@ -61,11 +62,60 @@ var ScoutMap = Backbone.View.extend({
         	{ "featureType": "road.arterial", "elementType": "labels.text", "stylers": [ { "visibility": "on" } ] },
         	{ "featureType": "road.local", "elementType": "labels.text", "stylers": [ { "visibility": "on" } ] },{ } ],
 		};
+
+		//////////////////  Grabs users geolocation //////////////////
+	    if(navigator.geolocation) {
+			navigator.geolocation.getCurrentPosition(function(position) {
+				console.log('grabbing location from nav');
+				var pos = new google.maps.LatLng(position.coords.latitude,
+	    		position.coords.longitude);		      		
+	      		app.map.setCenter(pos);
+
+
+				//////////////////  You are here marker //////////////////
+      			var userLocation = new google.maps.Marker({
+		      		map: app.map,
+		      		position: pos,
+		      		icon: 'images/you-are-here.png',
+		      		id: 'usersLocation',
+		      		animation: google.maps.Animation.DROP,
+
+      			});
+      			// mapVariables.userLat = position.coords.latitude;
+		      	// mapVariables.userLong = position.coords.longitude;
+		      	// mapVariables.LatLng = (position.coords.latitude, position.coords.longitude);
+      					      	// return pos;	
+    		}, function() {
+      			handleNoGeolocation(true);
+    		});
+    	} else {
+			//////////////////  If browser doesn't allow geo, use default //////////////////
+			handleNoGeolocation(false);
+		};
+
+		//////////////////  Geolocation errors //////////////////		
+		function handleNoGeolocation(errorFlag) {
+  			if (errorFlag) {
+  				console.log('location found an error');
+			    var content = 'Error: The Geolocation service failed.';
+			} else {
+			  	console.log('grabbing map from no location');
+			    var content = 'Error: Your browser doesn\'t support geolocation.';
+			}
+		var options = {
+			map: app.map,
+			position: new google.maps.LatLng(45.517534,-122.648507),
+			content: content
+		};
+		app.map.setCenter(options.position);
+      	//end Geolocation	
+		};
+		
 		// google.maps.event.addListener(marker, 'click', function() {
 		// 	console.log('clicked on map!')
 		// };
 		//////////////////  Declares the actual map  //////////////////
-  		self.map = new google.maps.Map(document.getElementById("google-map"),mapProp);
+		app.map = new google.maps.Map(document.getElementById("google-map"),mapProp);
   		
 
 	},	

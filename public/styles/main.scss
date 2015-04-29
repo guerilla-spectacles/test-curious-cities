@@ -90,6 +90,9 @@ p {
     margin-right: auto;
 }
 
+.always-hidden {
+  display: none;
+}
 
 button:focus {
   @include active-style;
