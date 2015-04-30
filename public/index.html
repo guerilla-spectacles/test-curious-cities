@@ -1,57 +1,121 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Curious Cities!</title>
-	<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.css"></script>-->
-	<link rel="stylesheet" src="css/normalize.css/normalize.css">
-	<link rel="stylesheet" href="css/main.css">
-	<script src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
-	<script src="http://maps.googleapis.com/maps/api/js"></script>
-	<script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.2/underscore-min.js'></script>
-	<script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/backbone.js/1.1.2/backbone-min.js'></script>
-	<script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/mustache.js/0.8.1/mustache.min.js'></script>
-	<script src="javascripts/init-app.js"></script>
+	<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.css"></script>
+-->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+<!-- 	<link rel="stylesheet" src="css/normalize.css/normalize.css">
+-->
+<link href='http://fonts.googleapis.com/css?family=Open+Sans:600italic,400,300|Slabo+27px' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="css/main.css">
+<script src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script src="http://maps.googleapis.com/maps/api/js"></script>
+<script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.2/underscore-min.js'></script>
+<script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/backbone.js/1.1.2/backbone-min.js'></script>
+<script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/mustache.js/0.8.1/mustache.min.js'></script>
+<script src="javascripts/init-app.js"></script>
 
-	<script src="javascripts/markersview.js"></script>
-	<script src="javascripts/mapBBView.js"></script>	
-	<script src="javascripts/buttonView.js"></script>
-	<script type="text/javascript" src="javascripts/exif.js"></script>
+<script src="javascripts/markersview.js"></script>
+<script src="javascripts/mapBBView.js"></script>
+<script src="javascripts/buttonView.js"></script>
+<script type="text/javascript" src="javascripts/exif.js"></script>
 <script type="text/javascript" src="javascripts/s3upload.js"></script>
-	<script src="javascripts/oddView.js"></script>
-	<script src="javascripts/nearbyView.js"></script>
-	<script src="javascripts/aboutView.js"></script>
-	<script src="javascripts/main.js"></script>
+<script src="javascripts/oddView.js"></script>
+<script src="javascripts/nearbyView.js"></script>
+<script src="javascripts/aboutView.js"></script>
+<script src="javascripts/main.js"></script>
 </head>
 <body>
-	<header>
-		<div id="logo">
-			<h1>Curious Cities!</h1>
-		</div>
-
-		<div id="buttons">
-			<div class="button-container">
-				<button id="add-button">Add an Oddity</button>
-			</div>
-			 <!-- REMOVED UNTIL GUIDE ME OPTION IS AVAILABLE -->
-			
-			<div class="button-container">
-			<button id="guide-button">What's Nearby</button>
-			</div>
-			
-			<div class="button-container">
-			<button id="about-button">About</button>
-			</div>
+<!-- 	
+//////////Double check before deleting. Does everything work?
+<header>
+<div id="logo">
+	<h1>Curious Cities!</h1>
+</div>
+<div id="buttons">
+	<div class="button-container">
+		<button id="add-button">Add an Oddity</button>
 	</div>
+	<div class="button-container">
+		<button id="guide-button">What's Nearby</button>
+	</div>
+	<div class="button-container">
+		<button id="about-button">About</button>
+	</div>
+</div>
 </header>
-<div id="info-contents"></div>
-<div id="google-map" class="center small-map"></div>
+-->
+<nav class="navbar navbar-default">
+<div class="container-fluid">
+	<!-- Brand and toggle get grouped for better mobile display -->
+	<div class="navbar-header">
+		<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+			<span class="sr-only">Toggle navigation</span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+		</button>
+		<a class="navbar-brand" href="#">Curious Cities</a>
+	</div>
+
+	<!-- Collect the nav links, forms, and other content for toggling -->
+	<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+		<!-- 	    <div id="buttons>
+		"
+		<ul class="nav navbar-nav navbar-right">
+			<li>
+				<a href="#" id="add-button">Add an Oddity</a>
+			</li>
+			<li>
+				<a href="#" id="guide-button">What's Nearby</a>
+			</li>
+			<li>
+				<button id="about-button">About</button>
+			</li>
+		</ul>
+	</div>
+	-->
+	<div id="buttons">
+		<ul class="nav navbar-nav navbar-right">
+			<li>
+				<div class="button-container">
+					<button id="add-button">Add an Oddity</button>
+				</div>
+			</li>
+			<li>
+				<div class="button-container">
+					<button id="guide-button">What's Nearby</button>
+				</div>
+			</li>
+			<li>
+				<div class="button-container">
+					<button id="about-button">About</button>
+				</div>
+			</li>
+		</ul>
+	</div>
+
+</div>
+<!-- /.navbar-collapse -->
+</div>
+<!-- /.container-fluid -->
+</nav>
+<div class="jumbotron">
+<div class="container-fluid">
+<div class="row">
+<div class="col-md-8 small-map"id="google-map" ></div>
+<div class="col-md-8" id="info-contents"></div>
+</div>
+</div>
+</div>
 <!-- Figure out if small map class is necessary -->
 
 <!-- <section id="page-info">
 -->
-<!-- </section>-->
-
-
-</body>
+<!-- </section>--></body>
 </html>

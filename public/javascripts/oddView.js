@@ -9,7 +9,7 @@ var OddView = Backbone.View.extend({
 		var self = this;
 		//Template for marker info
 		addLoc = "<div id=\"add-button-div\" class=\"info-dropdown center\">\
-			<h2>Add a new location</h2>\
+			<h3>Add a new location</h3>\
 			<form>\
 				<input type='text' id='locationName' required name='location-name' placeholder='Location name'>\
 				<br>\
@@ -24,17 +24,9 @@ var OddView = Backbone.View.extend({
 				</select>\
 				<p>Upload an image of the location!<br>\
 				</p>\
-				<!--\
-				HOPING TO MAKE THIS DECORATIVE\
-				<div class='fileUpload' required>\
-    				<span>Upload</span>\
-    				<input placeholder='choose file' id='selectedFile' type='file' class='form-button'>\
-				</div>\
-				-->\
-				<span>Upload file to see location in console</span>\
 				<input id=\"location-file-input\" type=\"file\" accept=\"image/jpeg\" />\
 				<p id=\"status\"></p>\
-				<p id=\"locationURL\"></p>\
+				<p class='always-hidden' id=\"locationURL\"></p>\
 				<p class='always-hidden' id=\"latitideP\"></p>\
 				<p class='always-hidden' id=\"longitudeP\"></p>\
 				<div id=\"preview\"><img src=\"images/uploadPlaceholder.png\" style=\"width:300px;\" /></div>\
@@ -43,6 +35,7 @@ var OddView = Backbone.View.extend({
 			</form>\
 		</div>";
 		$('#info-contents').append(addLoc);
+		console.log("");
 	},
 
 	//////////////////  Controls the sumbit/save button event //////////////////
@@ -54,21 +47,25 @@ var OddView = Backbone.View.extend({
 		var $locationURL = $(this.el).find("#locationURL").html();
 		var $locationLatitude = $(this.el).find("#latitideP").html();
 		var $locationLongitude = $(this.el).find("#longitudeP").html();
+		// var $categoryType = $(this.el).find("#catType");
+		var selectedCategory;
+		function displayVals() {
+			selectedCategory = $( "#catType" ).val();
+		}
+		$( "select" ).change( displayVals );
+		displayVals();
+		// var $selectedCategory = $categoryType.options[$categoryType.selectedIndex].value;
 		var newMarker = {
-				img: ($locationURL),
-				title: ($locationName),
-				description: ($locationDesc ),
-				category: ($categoryType),
-				latitude: ($locationLatitude),
-				longitude: ($locationLongitude)
-				}
-
+			img: ($locationURL),
+			title: ($locationName),
+			description: ($locationDesc),
+			category: (selectedCategory),
+			latitude: ($locationLatitude),
+			longitude: ($locationLongitude)
+		}
 
 		toMap = function() {
-
-
 			mapLocs.create(newMarker);
-
 		};
 		toMap();
 	},
@@ -102,7 +99,6 @@ var OddView = Backbone.View.extend({
         		}
 
         		location.latitude = parseFloat(latitude);
-
         		location.longitude = parseFloat(longitude);
 
 		        //degrees is photoData.GPSLatitude[0], minutes is photoData.GPSLatitude[1], photoData.GPSLatitude[2]
@@ -132,9 +128,6 @@ var OddView = Backbone.View.extend({
 			            locationURL.innerHTML = public_url;
 			            locLatitude.innerHTML = location.latitude;
 			            locLongitude.innerHTML = location.longitude;
-			            // console.log(public_url);
-			            // console.log('here we go');
-			            // console.log(publicURL);
 			            //$(this.el).find("#status").val(public_url); //add public url to html id
 			        },
 			        onError: function(status) {
@@ -154,8 +147,5 @@ var OddView = Backbone.View.extend({
 		    	}
 	        }
 		)}
-
 	}
-
-
 })
