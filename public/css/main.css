@@ -63,13 +63,12 @@ header {
   width: 100%;
   box-sizing: border-box;
   display: inline;
+  background-color: white;
   height: 50vh;
   right: 0;
   top: 0; }
   #info-contents .info-dropdown {
     overflow: scroll;
-    height: 90vh;
-    height: 100%;
     padding: 10% 10%;
     width: 100%;
     text-align: center;
@@ -124,6 +123,16 @@ button:hover {
   max-width: 100%;
   height: auto;
   max-height: 300px; }
+
+#selected-marker {
+  background-color: white;
+  text-align: center;
+  padding: 30px; }
+  #selected-marker img {
+    width: auto;
+    max-width: 100%;
+    height: auto;
+    max-height: 300px; }
 
 input[type="email"], input[type="number"], input[type="password"], input[type="search"], input[type="tel"], input[type="text"], input[type="url"], input[type="color"], input[type="date"], input[type="datetime"], input[type="datetime-local"], input[type="month"], input[type="time"], input[type="week"] {
   background-color: #B5F8FF;

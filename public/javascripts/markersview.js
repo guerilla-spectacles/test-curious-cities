@@ -198,7 +198,7 @@ var MarkerView = Backbone.View.extend({
 
 
 
-					var infoWindowInfo = "<div id='guide-button-div' class='info-dropdown center'><div class='curiousProfile'><h3>" + title + "</h3><img class='curious-img' src=" + img + "><p class='curious-description'>" + desc + "</p><p class='curious-type'>Category:<br>" + category + '</p></div>';
+					var infoWindowInfo = "<div class='curiousProfile'><h3>" + title + "</h3><img class='curious-img' src=" + img + "><p class='curious-description'>" + desc + "</p><p class='curious-type'>Category:<br>" + category + '</p></div>';
 					infowindow.setContent(infoWindowInfo);
 
 					// if(this.sidebarButton)this.sidebarButton.button.focus();
@@ -221,50 +221,23 @@ var MarkerView = Backbone.View.extend({
 
 			})(marker));
 			locationList.push(marker);
-				var $selectedDiv = "<div id='guide-button-div' class='info-dropdown center'><h2>Closest Curiosties</h2><ul id='loc-list'></ul></div>";
-				document.getElementById('info-contents').innerHTML=$selectedDiv;
-
-				// var selectedDiv = document.getElementById("loc-list");
-				// console.log(selectedDiv);  			
-
-
-  	// 		function createMarkerButton(marker) {
-			// 	//Creates a sidebar button
-			// 	// var theThing = "<div id='guide-button-div' class='info-dropdown center'><ul id=loc-list></ul></div>";
-			// 	// thing.appendChild()
-			// 	// console.log(theThing);
-			// 	// var $selectedDiv = $("#guide-button-div");
-			// 	// var $selectedDiv = "<div id='guide-button-div' class='info-dropdown center'><h2>Closest Curiosties</h2><ul id='loc-list'></ul></div>";
-			// 	// document.getElementById('info-contents').innerHTML=$selectedDiv;
-			// 	// console.log($selectedDiv);
-				
-			// 	var ul = $("#loc-list");
-			// 	console.log(ul);
-			// 	var li = document.createElement("li");
-			// 	// var title = marker.getTitle();
-			// 	li.innerHTML = title;
-			// 	console.log(li);
-			// 	ul.append(li);
-
-			// 	//Trigger a click event to marker when the button is clicked.
-			// 	// google.maps.event.addDomListener(li, "click", function(){
-			// 	// 	google.maps.event.trigger(marker, "click");
-			// 	// 	console.log("hi");
-			// 	// });
-			// };
 
 
 
-			      // == rebuilds the sidebar to match the markers currently displayed ==
+//THIS ONE
 	        function makeSidebar() {
 	        	console.log(locationList);
 		        var html = "";
-		        var node = document.getElementById("guide-button-div");
+		        // var node = document.getElementById("loc-list");
 		        for (var i=0; i<locationList.length; i++) { 
 		        console.log(locationList[i].mycategory); 
-	            	html += '<a href="javascript:myclick(' + i + ')">' + locationList[i].title + '<\/a><br>';
+		        	html += '<li><a href="javascript:myclick(' + i + ')">' + locationList[i].title + '<\/a></li>';
+		        	// console.log(html);
 	    	    }
-	        	$("#guide-button-div").append(html);
+	    	    var theListContents = "<ul>" + html + "</ul>";
+	    	    console.log(theListContents);
+
+	        	document.getElementById('the-list').innerHTML = theListContents;
 	      	}
 			makeSidebar();
 
@@ -302,6 +275,53 @@ var MarkerView = Backbone.View.extend({
 		// }
 		// console.log(locationList);
 
+
+		  	// 		function createMarkerButton(marker) {
+			// 	//Creates a sidebar button
+			// 	// var theThing = "<div id='guide-button-div' class='info-dropdown center'><ul id=loc-list></ul></div>";
+			// 	// thing.appendChild()
+			// 	// console.log(theThing);
+			// 	// var $selectedDiv = $("#guide-button-div");
+			// 	// var $selectedDiv = "<div id='guide-button-div' class='info-dropdown center'><h2>Closest Curiosties</h2><ul id='loc-list'></ul></div>";
+			// 	// document.getElementById('info-contents').innerHTML=$selectedDiv;
+			// 	// console.log($selectedDiv);
+				
+			// 	var ul = $("#loc-list");
+			// 	console.log(ul);
+			// 	var li = document.createElement("li");
+			// 	// var title = marker.getTitle();
+			// 	li.innerHTML = title;
+			// 	console.log(li);
+			// 	ul.append(li);
+
+			// 	//Trigger a click event to marker when the button is clicked.
+			// 	// google.maps.event.addDomListener(li, "click", function(){
+			// 	// 	google.maps.event.trigger(marker, "click");
+			// 	// 	console.log("hi");
+			// 	// });
+			// };
+
+
+
+			      // == rebuilds the sidebar to match the markers currently displayed ==
+	  //       function makeSidebar() {
+	  //       	console.log(locationList);
+		 //        var html = "";
+		 //        var listSpot = $("#loc-list");
+			// 	var node = document.getElementById("loc-list");
+		 //        console.log(listSpot);
+		 //        for (var i=0; i<locationList.length; i++) { 
+		 //        	console.log(locationList[i].mycategory); 
+		 //        	html += '<li><a href="javascript:myclick(' + i + ')">' + locationList[i].title + '<\/a></li>';
+		 //        	// $(listSpot).append(html);
+	  //   	    };
+	  //   	    console.log(html);
+	  //   	    $("#loc-list").append(html);
+	  //       	// $(listSpot).append(html);
+	  //     	}
+			// makeSidebar();
+
+
 	},
 
 
@@ -327,7 +347,7 @@ var MarkerView = Backbone.View.extend({
 		 //    this.getPanes().markerLayer.id='markerLayer';
 		 // };
 		 // myoverlay.setMap(map);
-	});    
+});    
 			/*var flag = new google.maps.Marker({
 				position: map.center, 
 		});
