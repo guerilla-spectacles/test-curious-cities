@@ -24,17 +24,9 @@ var OddView = Backbone.View.extend({
 				</select>\
 				<p>Upload an image of the location!<br>\
 				</p>\
-				<!--\
-				HOPING TO MAKE THIS DECORATIVE\
-				<div class='fileUpload' required>\
-    				<span>Upload</span>\
-    				<input placeholder='choose file' id='selectedFile' type='file' class='form-button'>\
-				</div>\
-				-->\
-				<span>Upload file to see location in console</span>\
 				<input id=\"location-file-input\" type=\"file\" accept=\"image/jpeg\" />\
 				<p id=\"status\"></p>\
-				<p id=\"locationURL\"></p>\
+				<p class='always-hidden' id=\"locationURL\"></p>\
 				<p class='always-hidden' id=\"latitideP\"></p>\
 				<p class='always-hidden' id=\"longitudeP\"></p>\
 				<div id=\"preview\"><img src=\"images/uploadPlaceholder.png\" style=\"width:300px;\" /></div>\
@@ -43,6 +35,7 @@ var OddView = Backbone.View.extend({
 			</form>\
 		</div>";
 		$('#info-contents').append(addLoc);
+		console.log("");
 	},
 
 	//////////////////  Controls the sumbit/save button event //////////////////
