@@ -19,11 +19,11 @@ var Buttons = Backbone.View.extend({
 		var target = $(event.target);
 		var targetID = $(target).attr("id")
 		if (targetID == 'add-button'){
-			Add = new sidebars('add')
+			Add = new OddView()
 		} else if (targetID == 'guide-button'){
-			Guide = new sidebars('guide')
+			Guide = new NearbyView()
 		} else if (targetID == 'about-button'){
-			Info = new sidebars('info')
+			Info = new AboutView()
 		};	
 	},
 })

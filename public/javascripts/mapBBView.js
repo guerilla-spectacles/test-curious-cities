@@ -11,7 +11,7 @@ var ScoutMap = Backbone.View.extend({
 		//var locationFlag = new MarkerView({map: map, collection: mapLocs});
 		mapLocs.fetch();
 		var curiousButtons = new Buttons();
-		var StartBar = new sidebars('add');
+		var StartBar = new OddView();
 		
 		// console.log('here is location flag');
 		// console.log(locationFlag);
