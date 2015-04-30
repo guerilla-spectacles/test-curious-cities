@@ -18,10 +18,10 @@ var sidebars = Backbone.View.extend({
 		var template = "<div id='guide-button-div' class='info-dropdown center'><h2>Closest Curiosties</h2><div class='curiousProfile'><h3>{{title}}</h3><img class='curious-img' src='{{img}}'><p class='curious-description'>{{description}}</p><p class='curious-type'>Category:{{curiousType}}</p></div>"
 		
 		//Converts marker info into template material
-		var theCode = Mustache.to_html(template, fakeDB.locations[1]);
+		// var theCode = Mustache.to_html(template, markers.locations[1]);
 
 		//makes the sidebar section
-		oddity = theCode;
+		oddity = template;
 
 		var $name     
 

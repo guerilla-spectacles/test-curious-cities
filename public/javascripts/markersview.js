@@ -1,61 +1,4 @@
 //////////////////  Fake DB for build/test purposes //////////////////
-var fakeDB = {};
-fakeDB.locations = [
-	{
-		title: 'Fake DB 1: Angst on Angst',
-		description: 'This is a weird and ugly mural of some sort of hipster meta-angst.  #ugly',
-		curiousType: 'Art',
-		img: 'images/jollyRog.jpg',
-		latitude: 45.51361,
-		longitude: -122.65904,
-		category: 'Art'
-	},
-	{
-		title: 'Fake DB 2: Portlandy picture',
-		description: 'Hey look! Its Portland!  #pdx',
-		curiousType: 'Stuff',
-		img: 'images/pdx.jpg',
-		latitude: 45.517555,
-		longitude: -122.63119,
-		category: 'Art'
-	},
-	{
-		title: 'Fake DB 3: Blurry Image',
-		description: 'This is a blurry mural. Not a good pucture #outoffocus',
-		curiousType: 'Stuff',
-		img: 'images/fontina.png',
-		latitude: 45.517255,
-		longitude: -122.621819,
-		category: 'Art'
-	},
-	{
-		title: 'Fake DB 4: Random placeholder',
-		description: 'Placeholder picture of the Portland trailblazers.#ripcity',
-		curiousType: 'Stuff',
-		img: 'images/blazers.jpg',
-		latitude: 45.51555,
-		longitude: -122.6419,
-		category: 'Art'
-	},
-	{
-		title: 'Fake DB 5: Random placeholder',
-		description: 'Placeholder picture of the Portland trailblazers.#ripcity',
-		curiousType: 'Stuff',
-		img: 'images/blazers.jpg',
-		latitude: 45.49555,
-		longitude: -122.6419,
-		category: 'Art'
-	},
-	{
-		title: 'Fake DB 6: Random placeholder',
-		description: 'Placeholder picture of the Portland trailblazers.#ripcity',
-		curiousType: 'Stuff',
-		img: 'images/blazers.jpg',
-		latitude: 45.59555,
-		longitude: -122.7419,
-		category: 'Art'
-	}];
-
 var locationList = [];	
 // var closestList = [];
 
@@ -147,7 +90,6 @@ var MarkerView = Backbone.View.extend({
         // }
 
 
-		// for (i=0; i < fakeDB.locations.length; i++) {
 			var desc = this.model.get('description');
 			var latitude= this.model.get('latitude');
 			var longitude = this.model.get('longitude');
@@ -182,10 +124,6 @@ var MarkerView = Backbone.View.extend({
 				return function() {
 
 					var infoWindowInfo = "<div id='guide-button-div' class='info-dropdown center'><h2>Closest Curiosties</h2><div class='curiousProfile'><h3>" + title + "</h3><img class='curious-img' src=" + img + "><p class='curious-description'>" + desc + "</p><p class='curious-type'>Category:<br>" + category + '</p></div>';
-
-					//////////////Info Window if we want it ///////////////
-					// infowindow.setContent("<div id='guide-button-div' class='info-dropdown center'><h2>Closest Curiosties</h2><div class='curiousProfile'><h3>" + fakeDB.locations[i].title + "</h3><img class='curious-img' src=" + fakeDB.locations[i].img + "><p class='curious-description'>" + fakeDB.locations[i].description + "</p><p class='curious-type'>Category:" + fakeDB.locations[i].category + '</p></div>');
-					// infowindow.open(map, marker);
 
 					////////MAkes the sidebar content from the marker info
 					document.getElementById('info-contents').innerHTML=infoWindowInfo;
@@ -232,7 +170,3 @@ var MarkerView = Backbone.View.extend({
 console.log("Yeah I see you");
 	// },
 
-// for (i=0; i < fakeDB.locations.length; i++) 
-// 			var c = Math.sqrt( mapVariables.userLat * latitude + mapVariables.userLong * longitude );
-// 			// var distance = google.maps.geometry.spherical.computeDistanceBetween(from:mapVariables.LatLng, to:thisLatLng, radius?:number);
-// 				console.log(c);
