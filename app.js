@@ -15,9 +15,12 @@ app.set('views', path.join(__dirname, 'public'));
 app.set('title', 'Curious Cities ');
 app.engine('html', require('ejs').renderFile);
 app.set('port', process.env.PORT || 3000);
+app.use(express.static(path.join(__dirname, 'public')));
+app.use(bodyParser.json());
+
+app.use('/', routes);
 app.use('/api', routes);
 app.use('/c/:id', routes);
-app.use(express.static(path.join(__dirname, 'public')));
 
 var AWS_ACCESS_KEY_ID = process.env.AWS_ACCESS_KEY_ID;
 var AWS_SECRET_ACCESS_KEY = process.env.AWS_SECRET_ACCESS_KEY;
@@ -52,22 +55,5 @@ app.get('/sign_s3', function(req, res){
         } 
     });
 });
-
-//     app.post('/submit_form', function(req, res){
-// //    
-//         db.post('curious-data', {
-//             "url": req.param("picture_url"),
-//             "name": req.param("name"),
-//             "description": req.param("description"),
-//             "category": req.param("oddity_type"),
-//             "uploadTime": new Date()
-//         })
-//         .then(function (res) {
-//             console.log(res.statusCode)
-//         })
-//         .fail(function(err) {
-
-//         });
-// });
 
 app.listen(app.get('port'));

@@ -18,10 +18,10 @@ var sidebars = Backbone.View.extend({
 		var template = "<div id='guide-button-div' class='info-dropdown center'><h2>Closest Curiosties</h2><div class='curiousProfile'><h3>{{title}}</h3><img class='curious-img' src='{{img}}'><p class='curious-description'>{{description}}</p><p class='curious-type'>Category:{{curiousType}}</p></div>"
 		
 		//Converts marker info into template material
-		var theCode = Mustache.to_html(template, fakeDB.locations[1]);
+		// var theCode = Mustache.to_html(template, markers.locations[1]);
 
 		//makes the sidebar section
-		oddity = theCode;
+		oddity = template;
 
 		// var $name     
 
@@ -71,7 +71,9 @@ var sidebars = Backbone.View.extend({
 				<p class='always-hidden' id=\"latitideP\"></p>\
 				<p class='always-hidden' id=\"longitudeP\"></p>\
 				<div id=\"preview\"><img src=\"images/uploadPlaceholder.png\" style=\"width:300px;\" /></div>\
-				<input type='submit' id='save' value='Submit' METHOD=POST action='/api'>\
+				<br>\
+				<input type='submit' id='save' value='Submit'>\
+
 			</form>\
 		</div>";
 
@@ -107,7 +109,7 @@ var sidebars = Backbone.View.extend({
 
 	//////////////////  Controls the sumbit/save button event //////////////////
 	save: function(event){
-		event.preventDefault();
+		// event.preventDefault();
 		var $locationName = $(this.el).find('#locationName').val();
 		var $locationDesc = $(this.el).find('#description').val();
 		// var $categoryType = $(this.el).find("#catType");
@@ -137,10 +139,10 @@ var sidebars = Backbone.View.extend({
 
 
 			///////FOR WHEN ORCHESTRATE IS SET UP!
-			// mapLocs.create(newMarker);
+			mapLocs.create(newMarker);
 
 			//////////Delete when orchestrate is set up
-			mapLocs.add(newMarker);
+			// mapLocs.add(newMarker);
 
 			
 				// var newMarkerView = new MarkerView({model: newMarker});
