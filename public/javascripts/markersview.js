@@ -68,8 +68,8 @@ var MarkerView = Backbone.View.extend({
 				category: category,
 				id: 'markerLayer',
 			});
-			marker.mycategory = category;              
-        	marker.myname = name;
+			// marker.mycategory = category;              
+   //      	marker.myname = name;
 			// console.log(mapVariables.userLat);
 
 			// console.log(marker);
