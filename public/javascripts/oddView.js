@@ -22,15 +22,12 @@ var OddView = Backbone.View.extend({
 				<option value='Architecture'>Architecture</option>\
 				<option value='Other'>Other</option>\
 				</select>\
-				<p>Upload an image of the location!<br>\
-				</p>\
-				<input id=\"location-file-input\" type=\"file\" accept=\"image/jpeg\" />\
 				<p id=\"status\"></p>\
 				<p class='always-hidden' id=\"locationURL\"></p>\
 				<p class='always-hidden' id=\"latitideP\"></p>\
 				<p class='always-hidden' id=\"longitudeP\"></p>\
 				<div id=\"preview\"><img src=\"images/uploadPlaceholder.png\" style=\"width:300px;\" /></div>\
-				<br>\
+				<input id=\"location-file-input\" type=\"file\" accept=\"image/jpeg\" />\
 				<input type='submit' id='save' value='Submit'>\
 			</form>\
 		</div>";

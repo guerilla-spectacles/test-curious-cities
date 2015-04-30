@@ -7,7 +7,6 @@ var NearbyView = Backbone.View.extend({
 	initialize: function(){
 		var self = this;
 		var theCode = "<div id='guide-button-div' class='info-dropdown center'>" +
-		"<h2>Closest Curiosties!</h2>" +
 			// "<div id='the-list'>" +
 				// "<p>Listfksdj</p>" +
 			// "</div>" +
