@@ -24,62 +24,22 @@ var MapLocs = Backbone.Collection.extend({
 });
 var mapLocs = new MapLocs();
 
-
-// //////////////////  Puts all objects from fake DB in the MapLocs collection //////////////////
-// mapLocs.add(fakeDB.locations);
-
-
-		/////////////Closest Marker Attempt
-		        // find the closest location to the user's location
-        // var closest = 0;
-        // var mindist = 99999;
-
-
-///////////Delete this section? ///////////
-//////////////////  Makes view for all of the markers //////////////////
-// var AllMarkersView = Backbone.View.extend({
-// 	el: '#google-map',
-// 	render: function() {
-// 		this.collection.each(function (marker) {
-// 			// console.log('making a marker');
-// 			var markerView = new MarkerView({model: marker});
-// 			// console.log('before markerView Render');
-// 			// markerView.render();
-// 			// console.log(markerView);
-// 		});
-// 	},
-
-// 	initialize: function() {
-// 		var self = this;
-// 		self.render();
-// 		// console.log('allMarkersView hello')
-// 	}
-// });
-
-
 //////////////////  Makes view for each individual marker //////////////////
 var MarkerView = Backbone.View.extend({
 	// each id
 	el: "#google-map",
-	// var self = this;
 	className : 'google-map-marker',
 
 	
 	initialize: function(){
 		var self = this;
 		self.map = app.map;
-		// console.log(self);
 		self.render();
-		// console.log('here is map after installing from opts');
-		// console.log(map);
 	},
 
-	// placeMarker: function(){
-	// 	console.log("Hi from placeMarker");
-	// },
-
-	// Render stationary middle flag
 	render: function(){
+
+////////Work for potential closest locations
 		// find the closest location to the user's location
         // var closest = 0;
         // var mindist = 99999;
@@ -89,17 +49,15 @@ var MarkerView = Backbone.View.extend({
         // 	LatLng: null
         // }
 
-
+        	/////////////////  Gathers info from model- preps for google maps /////////////////
 			var desc = this.model.get('description');
 			var latitude= this.model.get('latitude');
 			var longitude = this.model.get('longitude');
 			var img = this.model.get('img');
 			var category = this.model.get('category');
 			var title = this.model.get('title');
-			// var thisLatLng = (latitude, longitude);
 
-
-
+			/////////////////  Creates actual marker on map /////////////////
 			var marker = new google.maps.Marker({
 				icon: 'images/map-marker-image.png',
 				position: new google.maps.LatLng(latitude, longitude),
@@ -110,6 +68,8 @@ var MarkerView = Backbone.View.extend({
 				category: category,
 				id: 'markerLayer',
 			});
+			marker.mycategory = category;              
+        	marker.myname = name;
 			// console.log(mapVariables.userLat);
 
 			// console.log(marker);
@@ -122,51 +82,40 @@ var MarkerView = Backbone.View.extend({
 
 			google.maps.event.addListener(marker, 'click', (function(marker, i) {
 				return function() {
-
 					var infoWindowInfo = "<div id='guide-button-div' class='info-dropdown center'><h2>Closest Curiosties</h2><div class='curiousProfile'><h3>" + title + "</h3><img class='curious-img' src=" + img + "><p class='curious-description'>" + desc + "</p><p class='curious-type'>Category:<br>" + category + '</p></div>';
 
 					////////MAkes the sidebar content from the marker info
 					document.getElementById('info-contents').innerHTML=infoWindowInfo;
 				};
 			})(marker));
-			locationList.push(marker.title);
+			locationList.push(marker);
 		// }
-		// console.log(locationList);
+		console.log(locationList);
+
+		//THIS ONE
+	        function makeSidebar() {
+	        	console.log(locationList);
+		        var html = "";
+		        // var node = document.getElementById("loc-list");
+		        for (var i=0; i<locationList.length; i++) { 
+		        console.log(locationList[i].mycategory); 
+		        	html += '<li><a href="javascript:myclick(' + i + ')">' + locationList[i].title + '<\/a></li>';
+		        	// console.log(html);
+	    	    }
+	    	    var theListContents = "<ul>" + html + "</ul>";
+	    	    console.log(theListContents);
+
+	        	document.getElementById('the-list').innerHTML = theListContents;
+	      	}
+			makeSidebar();
 
 	},
-
-
 
 		// for (i = 0; i <= locationList.length; i++) {
 		// 	console.log(locationList);
 		// 	console.log("location list" + locationList[i].title);
 		// };
 
-
-
-			// Makes markers clickable
-			// google.maps.event.addListener(marker, 'click', function() {
-			// // map.setZoom(8);
-			// // console.log('before move');
-			// map.setCenter(marker.getPosition());
-			// console.log(marker.description);
-			// });
-			// ADDS INFO WINDOW TO MARKER  
-			// link = '';            bindInfoWindow(marker, map, locations[i][0], description, telephone, email, web, link);
-		 //  var myoverlay = new google.maps.OverlayView();
-		 //   myoverlay.draw = function () {
-		 //    this.getPanes().markerLayer.id='markerLayer';
-		 // };
-		 // myoverlay.setMap(map);
 	});    
-			/*var flag = new google.maps.Marker({
-				position: map.center, 
-		});
-		flag.setMap(self.map);
-		*/
-
-
 
 console.log("Yeah I see you");
-	// },
-

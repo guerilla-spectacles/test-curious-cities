@@ -47,21 +47,25 @@ var OddView = Backbone.View.extend({
 		var $locationURL = $(this.el).find("#locationURL").html();
 		var $locationLatitude = $(this.el).find("#latitideP").html();
 		var $locationLongitude = $(this.el).find("#longitudeP").html();
+		// var $categoryType = $(this.el).find("#catType");
+		var selectedCategory;
+		function displayVals() {
+			selectedCategory = $( "#catType" ).val();
+		}
+		$( "select" ).change( displayVals );
+		displayVals();
+		// var $selectedCategory = $categoryType.options[$categoryType.selectedIndex].value;
 		var newMarker = {
-				img: ($locationURL),
-				title: ($locationName),
-				description: ($locationDesc ),
-				category: ($categoryType),
-				latitude: ($locationLatitude),
-				longitude: ($locationLongitude)
-				}
-
+			img: ($locationURL),
+			title: ($locationName),
+			description: ($locationDesc),
+			category: (selectedCategory),
+			latitude: ($locationLatitude),
+			longitude: ($locationLongitude)
+		}
 
 		toMap = function() {
-
-
 			mapLocs.create(newMarker);
-
 		};
 		toMap();
 	},
@@ -95,7 +99,6 @@ var OddView = Backbone.View.extend({
         		}
 
         		location.latitude = parseFloat(latitude);
-
         		location.longitude = parseFloat(longitude);
 
 		        //degrees is photoData.GPSLatitude[0], minutes is photoData.GPSLatitude[1], photoData.GPSLatitude[2]
@@ -125,9 +128,6 @@ var OddView = Backbone.View.extend({
 			            locationURL.innerHTML = public_url;
 			            locLatitude.innerHTML = location.latitude;
 			            locLongitude.innerHTML = location.longitude;
-			            // console.log(public_url);
-			            // console.log('here we go');
-			            // console.log(publicURL);
 			            //$(this.el).find("#status").val(public_url); //add public url to html id
 			        },
 			        onError: function(status) {
@@ -147,8 +147,5 @@ var OddView = Backbone.View.extend({
 		    	}
 	        }
 		)}
-
 	}
-
-
 })
