@@ -33,7 +33,7 @@ var ScoutMap = Backbone.View.extend({
 
 		    zoom:14,
 		    maxZoom: 18,
-		    minZoom: 6,
+		    minZoom: 3,
 	        zoomControl: true,
 	        zoomControlOptions: {
 	            style: google.maps.ZoomControlStyle.DEFAULT,
