@@ -14,8 +14,6 @@ var Marker = Backbone.Model.extend({
 });
 
 
-// var allMarkersView = new 
-
 //////////////////  Makes collection for all map locations //////////////////
 var MapLocs = Backbone.Collection.extend({
 	model: Marker,
@@ -23,39 +21,6 @@ var MapLocs = Backbone.Collection.extend({
 	url: '/api'
 });
 var mapLocs = new MapLocs();
-
-
-// //////////////////  Puts all objects from fake DB in the MapLocs collection //////////////////
-// mapLocs.add(fakeDB.locations);
-
-
-		/////////////Closest Marker Attempt
-		        // find the closest location to the user's location
-        // var closest = 0;
-        // var mindist = 99999;
-
-
-///////////Delete this section? ///////////
-//////////////////  Makes view for all of the markers //////////////////
-// var AllMarkersView = Backbone.View.extend({
-// 	el: '#google-map',
-// 	render: function() {
-// 		this.collection.each(function (marker) {
-// 			// console.log('making a marker');
-// 			var markerView = new MarkerView({model: marker});
-// 			// console.log('before markerView Render');
-// 			// markerView.render();
-// 			// console.log(markerView);
-// 		});
-// 	},
-
-// 	initialize: function() {
-// 		var self = this;
-// 		self.render();
-// 		// console.log('allMarkersView hello')
-// 	}
-// });
-
 
 //////////////////  Makes view for each individual marker //////////////////
 var MarkerView = Backbone.View.extend({
@@ -68,27 +33,11 @@ var MarkerView = Backbone.View.extend({
 	initialize: function(){
 		var self = this;
 		self.map = app.map;
-		// console.log(self);
 		self.render();
-		// console.log('here is map after installing from opts');
-		// console.log(map);
 	},
-
-	// placeMarker: function(){
-	// 	console.log("Hi from placeMarker");
-	// },
 
 	// Render stationary middle flag
 	render: function(){
-		// find the closest location to the user's location
-        // var closest = 0;
-        // var mindist = 99999;
-        // var mapVariables = {
-        // 	userLong: null,
-        // 	userLat: null,
-        // 	LatLng: null
-        // }
-
 
 			var desc = this.model.get('description');
 			var latitude= this.model.get('latitude');
@@ -110,9 +59,7 @@ var MarkerView = Backbone.View.extend({
 				category: category,
 				id: 'markerLayer',
 			});
-			// console.log(mapVariables.userLat);
 
-			// console.log(marker);
 			var infowindow = new google.maps.InfoWindow();
 
 			//Close any open infoWindow if the map is clicked (don't want more than one open at a time)
@@ -129,42 +76,32 @@ var MarkerView = Backbone.View.extend({
 					document.getElementById('info-contents').innerHTML=infoWindowInfo;
 				};
 			})(marker));
-			locationList.push(marker.title);
+			locationList.push(marker);
 		// }
 		// console.log(locationList);
 
 	},
 
+	// 	//THIS ONE
+	//         function makeSidebar() {
+	//         	console.log(locationList);
+	// 	        var html = "";
+	// 	        // var node = document.getElementById("loc-list");
+	// 	        for (var i=0; i<locationList.length; i++) { 
+	// 	        console.log(locationList[i].mycategory); 
+	// 	        	html += '<li><a href="javascript:myclick(' + i + ')">' + locationList[i].title + '<\/a></li>';
+	// 	        	// console.log(html);
+	//     	    }
+	//     	    var theListContents = "<ul>" + html + "</ul>";
+	//     	    console.log(theListContents);
 
+	//         	document.getElementById('the-list').innerHTML = theListContents;
+	//       	}
+	// 		makeSidebar();
 
-		// for (i = 0; i <= locationList.length; i++) {
-		// 	console.log(locationList);
-		// 	console.log("location list" + locationList[i].title);
-		// };
+	// },
 
-
-
-			// Makes markers clickable
-			// google.maps.event.addListener(marker, 'click', function() {
-			// // map.setZoom(8);
-			// // console.log('before move');
-			// map.setCenter(marker.getPosition());
-			// console.log(marker.description);
-			// });
-			// ADDS INFO WINDOW TO MARKER  
-			// link = '';            bindInfoWindow(marker, map, locations[i][0], description, telephone, email, web, link);
-		 //  var myoverlay = new google.maps.OverlayView();
-		 //   myoverlay.draw = function () {
-		 //    this.getPanes().markerLayer.id='markerLayer';
-		 // };
-		 // myoverlay.setMap(map);
 	});    
-			/*var flag = new google.maps.Marker({
-				position: map.center, 
-		});
-		flag.setMap(self.map);
-		*/
-
 
 
 console.log("Yeah I see you");
