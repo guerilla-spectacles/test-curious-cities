@@ -2,7 +2,7 @@
 // @import url(http://fonts.googleapis.com/css?family=Open+Sans:600italic,400,300,800);
 
 //FIGURE OUT font-face
-@include font-face("Open-Sans", "http://fonts.googleapis.com/css?family=Open+Sans:600italic,400,300,800");
+// @include font-face("Open-Sans", "http://fonts.googleapis.com/css?family=Open+Sans:600italic,400,300,800");
 
 /////////// MIXINS  ////////////////
 
@@ -49,9 +49,6 @@ $light-orange: #FFBE04;
 $light-green: #75D1C6;
 $dark-green: #29C2B0;
 
-/////////// GLOBAL  ////////////////
-
-
 
 
 
@@ -60,7 +57,7 @@ $dark-green: #29C2B0;
 body {
 	background-color: $dark-green;
 	font-family: 'Open Sans', sans-serif;
-     font-size: 13px;
+     // font-size: 13px;
      margin: 0;
      bottom: 0;
 }
@@ -68,6 +65,16 @@ body {
 *, *:before, *:after {
      @include box-sizing(border-box);
 }
+
+/////////// GLOBAL  ////////////////
+
+.navbar {
+     border: none;
+     margin-bottom: 0;
+     font-family: 'Open Sans', sans-serif;
+     background-color: $dark-green;
+}
+
 
 h1 {
      margin: 0;
@@ -81,6 +88,7 @@ h2 {
 
 h3 {
      color: $dark-orange;
+     margin-bottom: 15px;
 }
 
 p {
@@ -130,6 +138,7 @@ header {
      width: 100%;
      box-sizing: border-box;
      display: inline;
+     padding: 0px;
      height: 50vh;
      right: 0;
      top: 0;
@@ -311,10 +320,11 @@ input[type="submit"] {
     color: #4272db;
 }
 
-#markerLayer img {
-  // border: 2px solid red !important;
-  @include border-radius;
-}
+//gooogle said to
+// #markerLayer img {
+//   // border: 2px solid red !important;
+//   @include border-radius;
+// }
 
 /////////// MEDIA QUERIES  ////////////////
 // @media screen and (min-width: 500px){

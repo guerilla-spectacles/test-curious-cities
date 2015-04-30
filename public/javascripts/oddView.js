@@ -9,7 +9,7 @@ var OddView = Backbone.View.extend({
 		var self = this;
 		//Template for marker info
 		addLoc = "<div id=\"add-button-div\" class=\"info-dropdown center\">\
-			<h2>Add a new location</h2>\
+			<h3>Add a new location</h3>\
 			<form>\
 				<input type='text' id='locationName' required name='location-name' placeholder='Location name'>\
 				<br>\

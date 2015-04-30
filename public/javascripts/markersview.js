@@ -87,6 +87,7 @@ var MarkerView = Backbone.View.extend({
 					////////MAkes the sidebar content from the marker info
 					document.getElementById('info-contents').innerHTML=infoWindowInfo;
 				};
+				
 			})(marker));
 			locationList.push(marker);
 		// }
