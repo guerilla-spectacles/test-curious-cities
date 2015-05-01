@@ -45,9 +45,6 @@ var MarkerView = Backbone.View.extend({
 			var img = this.model.get('img');
 			var category = this.model.get('category');
 			var title = this.model.get('title');
-			// var thisLatLng = (latitude, longitude);
-
-
 
 			var marker = new google.maps.Marker({
 				icon: 'images/map-marker-image.png',
@@ -77,12 +74,9 @@ var MarkerView = Backbone.View.extend({
 				};
 			})(marker));
 			locationList.push(marker);
-		// }
-		// console.log(locationList);
-
 	},
 
-	// 	//THIS ONE
+	// 	//Save for future use
 	//         function makeSidebar() {
 	//         	console.log(locationList);
 	// 	        var html = "";
@@ -102,8 +96,4 @@ var MarkerView = Backbone.View.extend({
 	// },
 
 	});    
-
-
-console.log("Yeah I see you");
-	// },
 

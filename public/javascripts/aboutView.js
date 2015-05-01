@@ -3,6 +3,7 @@ var AboutView = Backbone.View.extend({
 
 	initialize: function(){
 		var self = this;
+		
 		//////////////////  About Curious Cities Sidebar//////////////////
 		about = '<div id="about-button-div" class="info-dropdown center">' +
 					"<h3>About Curious Cities</h3>" +
