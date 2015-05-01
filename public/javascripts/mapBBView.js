@@ -5,24 +5,10 @@ var ScoutMap = Backbone.View.extend({
 
 		var self = this;
 		self.render();
-		// console.log('here is map, and then self.map');
-		// console.log(map);
-		// console.log(self.map);
 		//var locationFlag = new MarkerView({map: map, collection: mapLocs});
 		mapLocs.fetch();
 		var curiousButtons = new Buttons();
 		var StartBar = new OddView();
-		
-		// console.log('here is location flag');
-		// console.log(locationFlag);
-		// console.log(locationFlag.placeMarker);
-
-		//////////////////  ???????????? //////////////////
-		// var scoutPlace = new scoutMapView({map: map});
-		// google.maps.event.addListener(map, 'click', function(event) {
-  // 			locationFlag.placeMarker();
-  // 		});
-		// console.log(map);
 	},
 
 	render: function(){

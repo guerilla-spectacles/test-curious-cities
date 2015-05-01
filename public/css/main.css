@@ -129,7 +129,8 @@ button:hover {
   height: auto;
   max-height: 300px; }
 #guide-button-div .curious-description {
-  color: #005A6C; }
+  color: #005A6C;
+  padding-top: 15px; }
 #guide-button-div .curious-type {
   color: #29C2B0;
   font-weight: 300; }

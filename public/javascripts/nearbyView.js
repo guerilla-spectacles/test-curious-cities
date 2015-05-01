@@ -12,10 +12,10 @@ var NearbyView = Backbone.View.extend({
 			// "</div>" +
 			"<div id='selected-marker'>" +
 				"<div class='curiousProfile'>" +
-					"<h3>Joan of Arc!</h3>" +
-					"<img class='curious-img' src='images/testjoan.jpg'>" +
-					"<p class='curious-description'>Joan is here!</p>" +
-					"<p class='curious-type'>Category:<br>Architecture</p>" +
+					"<h3>Belmont goats</h3>" +
+					"<img class='curious-img' src='images/goat.JPG'>" +
+					"<p class='curious-description'>Gone but not forgotten. We miss you goats!</p>" +
+					"<p class='curious-type'>Category:<br>Nature</p>" +
 					"</div>" +
 				"</div>"
 

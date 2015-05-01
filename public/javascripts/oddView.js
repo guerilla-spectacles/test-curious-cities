@@ -132,12 +132,6 @@ var OddView = Backbone.View.extend({
 			        }
 		    	});
 
-		    	//$locationURL.val('changed location value');
-		    	//console.log($locationURL).val();
-		        // return location; 
-		        //console.log(location);
-
-		        // console.log(photoData);
 			    } 
 		    	else {
 		    		alert("file contains no location data");
